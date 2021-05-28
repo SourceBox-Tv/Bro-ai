@@ -1,0 +1,12 @@
+opencv_python
+python_vlc
+playsound
+pygame
+requests
+pafy
+pyjokes
+wikipedia
+gTTS
+wolframalpha
+SpeechRecognition
+PySimpleGUI
