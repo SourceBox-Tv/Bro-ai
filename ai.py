@@ -161,7 +161,7 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
         elif "who are you" in query:
             assistant_speaks("what are YOU, I dont know and what I know is  I was made in India  I like Hindi but my creator doesn't like that but we all are the same so does shourya or source box helping me to make this artificial intelligence called bro code; lalalala we all dance  together ")
         elif "who made you" in query:
-            assistant_speaks("I was made by supreme command of sourceboxtv aka shourya wadhwa")
+            assistant_speaks("I was made by shourya wadhwa, In India")
         elif "what is love" in query:
             assistant_speaks("7th sense , something we ai dont understand but it destroys human's all other senses")
         elif "what is your name" in query:
