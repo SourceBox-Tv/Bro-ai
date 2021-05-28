@@ -1,10 +1,10 @@
+import alive_progress
 import speech_recognition as sr
 from gtts import gTTS
 import playsound
 import os  # to save/open files
 import datetime
 import subprocess
-from twilio.rest.api.v2010.account import message
 import wolframalpha
 import shutil
 import tkinter
@@ -20,9 +20,10 @@ import ctypes
 import requests
 import cv2
 import vlcgui
-from time import ctime
+from time import ctime, sleep
 import time
-
+import win32com.client as wincl
+from urllib.request import urlopen
 mics = int(input("Tell your mic port pls type :"))
 num = 1
 
@@ -36,24 +37,22 @@ def assistant_speaks(output):  # this is for just adding gtts and removing its f
     toSpeak.save(file)
     playsound.playsound(file, True)
     os.remove(file)
-
-
+    
 def ai_mic():  # using mic to recognize and declaring text
-    mic = sr.Recognizer()
-    audio = ''
-    with sr.Microphone(device_index=mics) as source:
-        print("Listeningt text .....")
-        mic.adjust_for_ambient_noise(source)
-        audio = mic.listen(source, phrase_time_limit=5)
-        print("Recongnizing text ....")
-        try:
-            lang = mic.recognize_google(audio, language='en-UK')
-            print("your text:", lang)
+        mic = sr.Recognizer()
+        audio = ''
+        with sr.Microphone(device_index=mics) as source:
+            print("Listeningt text .....")
+            mic.adjust_for_ambient_noise(source)
+            audio = mic.listen(source, phrase_time_limit=5)
+            print("Recongnizing text ....")
+            try:
+                lang = mic.recognize_google(audio, language='en-UK')
+                print("your text:", lang)
+            except Exception as e:
+                assistant_speaks("could not understand your words try again")
+                return 0
             return lang
-        except:
-            assistant_speaks("could not understand your words try again")
-            return 0
-
 
 def wishMe():#this is for wishing user
     hour = int(datetime.datetime.now().hour)
@@ -73,8 +72,7 @@ def wishMe():#this is for wishing user
 
 def usrname():#this is for naming users
     assistant_speaks("What should i call you sir")
-    print("pls type this one last")
-    uname = input("")
+    uname = ai_mic()
     assistant_speaks("Welcome Mister/Mistress")
     assistant_speaks(uname)
     columns = shutil.get_terminal_size().columns
@@ -82,8 +80,7 @@ def usrname():#this is for naming users
     print("Welcome Mr.", uname.center(columns))
     print("#####################".center(columns))
     assistant_speaks("How can i Help you, Sir")
-
-
+    
 def times():#this is for declaring time
     strTime = ctime()
     assistant_speaks(f"Sir time right now is {strTime}.")
@@ -102,20 +99,20 @@ def times():#this is for declaring time
 def commands():#sorry edit query was above loop , loop not iniated but anyways its for running code 
     while (True):
         query = ai_mic()
-        if "wikipedia" in query:
+        if "YouTube" in query or "Youtube" in query:
+            assistant_speaks("Here on youtube")
+            youtubers = query.replace('YouTube', " ") or query.replace('Youtube', " ")
+            youtubers.split(',')
+            webbrowser.open("https://www.youtube.com/results?search_query=" + youtubers)
+            time.sleep(5)
+            
+        elif "wikipedia" in query:
             assistant_speaks('Searching wiki on net ....')
             queryr = query.replace('Wikipedia', "")
             query = wikipedia.summary(queryr, sentences=3)
             assistant_speaks("According to wiki ...")
             assistant_speaks(query)
             continue
-
-        elif "YouTube" in query or "Youtube" in query:
-            assistant_speaks("Here on youtube")
-            youtubers = query.replace('YouTube', " ") or query.replace('Youtube', " ")
-            youtubers.split(',')
-            webbrowser.open("https://www.youtube.com/results?search_query=" + youtubers)
-            time.sleep(5)
 
         elif "search" in query or 'find' in query:
             assistant_speaks("Searching globaly")
@@ -144,11 +141,14 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
         elif "Hibernate PC" in query:
             assistant_speaks("Entering loggin off mode")
             subprocess.call(["shutdown", "/l"])
+        elif "Hibernate PC" in query:
+            assistant_speaks("Entering restarting mode")
+            subprocess.call(["shutdown", "/r"])
         elif "bye" in query:
             assistant_speaks("Sleeping sir bye have a good day")
             print("press ctrl +c to activate again")
-            time.sleep(10000)
-            continue
+            bom = int(input("tell time to sleep"))
+            time.sleep(bom)
         elif "calculate" in query:
             app_id = "39AW66-9HU3K3AWKL"
             client = wolframalpha.Client(app_id)
@@ -198,19 +198,35 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
             pygame.mixer.music.play()
             if KeyboardInterrupt:
                 pygame.mixer.music.stop()
+        elif 'empty bin' in query:
+            winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
+            assistant_speaks("Recycle Bin Recycled")
+        elif "why you came to world" in query:
+            assistant_speaks("I cam because of github my mom, my dad shourya. He hosted code on github and now I am married to python without whom i cannot be more bro_code")
+        elif "Are u enemy of siri" in query or "are u friend of siri"in query or "is google your friend" in query or "is google your enemy" or "is alexa your enemy" in query or "are u friend of alexa":
+            assistant_speaks("It doesnot matter, it is my privacy, but we all are good chit chatter. Google is my best pal")
+        elif "Are u married" in query or "are u married" in query:
+            assistant_speaks("I am married to python, earlier my girlfriend was google")
+        elif "which is best language" in query or "which is best language" in query:
+            assistant_speaks("English is my supported language till now but I like python for coding.")
+        elif "what is your best quote" in query:
+            assistant_speaks("My best quote is print('hello world')")
+        elif "jokes"in query or "jokes" in query:
+            assistant_speaks(pyjokes.get_joke())
+        elif "why were u created " in query:
+            assistant_speaks("To help desktop users, pi users and making best ai for desktop rather than siri or google")    
         elif "update assistant" in query:
+            from alive_progress import alive_bar
             assistant_speaks("After downloading file please replace this file with the downloaded one")
-            url = '# url after uploading file'
+            url = 'https://raw.githubusercontent.com/SourceBox-Tv/Bro-aiwithpython/master/ai.py'
             r = requests.get(url, stream=True)
-
-            with open("Voice.py", "wb") as Pypdf:
-
-                total_length = int(r.headers.get('content-length'))
-
-                for ch in progress.bar(r.iter_content(chunk_size=2391975),
-                                       expected_size=(total_length / 1024) + 1):
-                    if ch:
-                        Pypdf.write(ch)
+            with alive_bar(100, bar='blocks', spinner = 'fish'):
+                with open("ai.py",'wb') as Pypdf:
+                     total_length = int(r.headers.get('content-length'))
+                for i in alive_progress(r.iter_content(chunk_size = 2391975),expected_size =(total_length / 1024) + 1):
+                    sleep(0.05)
+                    if i:
+                        Pypdf.write(r.content)
 
 
 """def mailer():    
