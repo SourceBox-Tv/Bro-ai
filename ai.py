@@ -208,17 +208,21 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
             assistant_speaks("To help desktop users, pi users and making best ai for desktop rather than siri or google")    
         elif "update assistant" in query:
             from clint.textui import progress
-            assistant_speaks("After downloading file please replace this file with the downloaded one")
-            url = 'https://raw.githubusercontent.com/SourceBox-Tv/Bro-aiwithpython/master/ai.py'
-            r = requests.get(url, stream=True)
-            with open("ai.py", "wb") as Pypdf:
+            assistant_speaks("After downloading file please replace this file with the downloaded one and restart the software")
+            url = ["https://raw.githubusercontent.com/SourceBox-Tv/Bro-aiwithpython/master/ai.py",
+             "https://raw.githubusercontent.com/SourceBox-Tv/Bro-aiwithpython/master/vlcgui.py",
+              "https://raw.githubusercontent.com/SourceBox-Tv/Bro-aiwithpython/master/screenshots.py"]
+            
+            files = ["ai.py","vlcgui.py","screenshot.py"]
+            for url, files in zip(url,files):
+                r = requests.get(url, stream=True)
+                with open(files, "wb") as Pypdf:
+                    total_length = int(r.headers.get('content-length'))
                  
-                total_length = int(r.headers.get('content-length'))
-                 
-                for ch in progress.bar(r.iter_content(chunk_size = 2391975),
+                    for ch in progress.bar(r.iter_content(chunk_size = 2391975),
                                        expected_size =(total_length / 1024) + 1):
-                    if ch:
-                      Pypdf.write(ch)
+                        if ch:
+                            Pypdf.write(ch)
         elif "what is" in query or "who is" in query or "convert" in query:
             app_id = "39AW66-9HU3K3AWKL"
             client = wolframalpha.Client(app_id)
