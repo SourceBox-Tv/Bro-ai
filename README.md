@@ -17,4 +17,5 @@ Windows version is easy downloading plug and play, more versions will come in fu
 
 
 Join our discord now pls 
- <iframe src="https://discord.com/widget?id=757875229656875080&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+
+https://discord.com/api/guilds/757875229656875080/widget.json
