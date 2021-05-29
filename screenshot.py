@@ -4,6 +4,7 @@ import pyautogui
 #root = tk.Tk()
 #canvas = tk.Canvas(root, width=300, height=300)
 #canvas.pack()
+#it takes screenshots
 jol = 1
 def screens():
     global jol
