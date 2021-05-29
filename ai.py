@@ -14,11 +14,12 @@ import webbrowser
 import os
 import pyjokes
 import requests
+import pygame
 import vlcgui
-from time import ctime, sleep
+from time import ctime
 import time
-import win32com.client as wincl
 from urllib.request import urlopen
+import winshell
 mics = int(input("Tell your mic port pls type :"))
 num = 1
 
@@ -27,7 +28,7 @@ def assistant_speaks(output):  # this is for just adding gtts and removing its f
     global num
     num += 1
     print("User: ", output)
-    toSpeak = gTTS(text=output, lang='en-UK', slow=False)
+    toSpeak = gTTS(text=output, lang='en-IN', slow=False)
     file = str(num)+".mp3 "
     toSpeak.save(file)
     playsound.playsound(file, True)
@@ -40,7 +41,7 @@ def ai_mic():  # using mic to recognize and declaring text
             print("Listeningt text .....")
             mic.adjust_for_ambient_noise(source)
             audio = mic.listen(source)
-            mic.pause_threshold = 3
+            mic.pause_threshold = 2.5
             print("Recongnizing text ....")
             try:
                 query = mic.recognize_google(audio, language='en-IN')
@@ -62,7 +63,7 @@ def wishMe():#this is for wishing user
     else:
         assistant_speaks("Hello, Good night")
     global name
-    name = ("Bro 1.0")
+    name = ("Bro 1.2")
     assistant_speaks("I am your virtualized Assistant")
     assistant_speaks(name)
 
@@ -144,7 +145,6 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
             subprocess.call(["shutdown", "/r"])
         elif "bye" in query:
             assistant_speaks("Sleeping sir bye have a good day")
-            print("press ctrl +c to activate again")
             bom = int(input("tell time to sleep"))
             time.sleep(bom)
         elif "calculate" in query:
@@ -165,8 +165,9 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
         elif "what is your name" in query:
             assistant_speaks("My name is" + name)
             time.sleep(1)
-        elif "change your name" in query:
-                query = query.replace("change your name", "")
+        
+        elif "change your name to" in query:
+                query = query.replace("change your name to", "")
                 name = query
                 assistant_speaks("thnks for naming me" + name)
         elif "where is" in query:
@@ -176,15 +177,17 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
         elif "my name" in query:
             assistant_speaks(uname)
         elif "nothing going on" in query or "having depression" in query or "having panic" in query:
-            import pygame
             pygame.mixer.init()
-            assistant_speaks("Take a deep breath, look closely inside you and drink a glass of water and just relax and chill.")
-            assistant_speaks("Life is not ending its just every day new beginning, so stop overthink")
-            assistant_speaks("So last advice as AI ; You are master of senses and control of imagination think beyond what others think  and  solve the life's equation , to win it")
-            pygame.mixer.music.load("sound\moonlight.mp3")
-            pygame.mixer.music.play()
-            if KeyboardInterrupt:
-                pygame.mixer.music.stop()
+            pygame.mixer.music.load(".\sounds\moonlight.mp3")
+            try:
+                pygame.mixer.music.play()
+                time.sleep(330)
+            except: 
+                if KeyboardInterrupt:
+                    pygame.mixer.quit()
+        elif "what can u do" in query or "What can u do" in query:
+            assistant_speaks("I can search you internet, youtube and also i can play u music when on music click playlist button to hear youtube songs, I can also search wikipedia for u , i can calculate, I can tell u some great jokes. Last we will be great pals have some chit chat with me")
+            assistant_speaks("To open maps say where is , to open browser say search , to use youtube say Youtube, to open music say play music, to check time say what is time now")
         elif "how are u" in query:
             assistant_speaks("I am fine what about u")
         elif "I am also fine" in query:
