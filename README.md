@@ -11,3 +11,6 @@ Plus if u downloaded this ai goto python and install using code <pip install -r 
 Download windows version from here https://github.com/SourceBox-Tv/Bro-aiwithpython/releases/download/1.2-alpha/ai.exe
  
 Windows version is easy downloading plug and play, more versions will come in future with diffrent os.
+
+ 
+ To update assistant,start assitant and say "update assitant"
