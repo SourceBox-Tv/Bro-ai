@@ -13,4 +13,4 @@ Download windows version from here https://github.com/SourceBox-Tv/Bro-aiwithpyt
 Windows version is easy downloading plug and play, more versions will come in future with diffrent os.
 
  
- To update assistant,start assitant and say "update assitant"
+ To update assistant,start assistant using exe or the folder with ai.py and say "update assistant"
