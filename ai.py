@@ -7,18 +7,13 @@ import datetime
 import subprocess
 import wolframalpha
 import shutil
-import tkinter
-import json
-import random
 import speech_recognition as sr
 import datetime
 import wikipedia
 import webbrowser
 import os
 import pyjokes
-import ctypes
 import requests
-import cv2
 import vlcgui
 from time import ctime, sleep
 import time
@@ -234,6 +229,11 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
                 assistant_speaks(next(res.results).text)
             except StopIteration:
                 print("No results")
+        elif "screenshot" in query:
+            import screenshots
+            screenshots.screens()
+        elif "stop" in query:
+            break;
         else:
             if "hi" in query or "hey" in query or "hay" in query or "hai" in query:
                 assistant_speaks("Hi , what is going on")
