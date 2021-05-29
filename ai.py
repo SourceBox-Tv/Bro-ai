@@ -44,15 +44,17 @@ def ai_mic():  # using mic to recognize and declaring text
         with sr.Microphone(device_index=mics) as source:
             print("Listeningt text .....")
             mic.adjust_for_ambient_noise(source)
-            audio = mic.listen(source, phrase_time_limit=5)
+            audio = mic.listen(source)
+            mic.pause_threshold = 3
             print("Recongnizing text ....")
             try:
-                lang = mic.recognize_google(audio, language='en-UK')
-                print("your text:", lang)
+                query = mic.recognize_google(audio, language='en-UK')
+                print(f"User said: {query}\n")
             except Exception as e:
                 assistant_speaks("could not understand your words try again")
                 return 0
-            return lang
+            
+            return query
 
 def wishMe():#this is for wishing user
     hour = int(datetime.datetime.now().hour)
@@ -72,6 +74,7 @@ def wishMe():#this is for wishing user
 
 def usrname():#this is for naming users
     assistant_speaks("What should i call you sir")
+    global uname
     uname = ai_mic()
     assistant_speaks("Welcome Mister/Mistress")
     assistant_speaks(uname)
@@ -165,7 +168,6 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
         elif "what is love" in query:
             assistant_speaks("7th sense , something we ai dont understand but it destroys human's all other senses")
         elif "what is your name" in query:
-            name = "brocode"
             assistant_speaks("My name is" + name)
             time.sleep(1)
         elif "change your name" in query:
@@ -176,18 +178,8 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
             query = query.replace("Where is", " ") or query.replace("where is", "")
             assistant_speaks("You asked for"+ query)
             webbrowser.open("https://www.google.com/maps/place/"+ query)
-        elif "what is" in query or "who is" in query or "convert" in query:
-            app_id = "39AW66-9HU3K3AWKL"
-            client = wolframalpha.Client(app_id)
-            res = client.query(query)
-
-            try:
-                print(next(res.results).text)
-                assistant_speaks(next(res.results).text)
-            except StopIteration:
-                print("No results")
-        elif "hi" in query or "hey" in query or "hay" in query or "hai" in query:
-            assistant_speaks("Hi , what is going on")
+        elif "my name" in query:
+            assistant_speaks(uname)
         elif "nothing going on" in query or "having depression" in query or "having panic" in query:
             import pygame
             pygame.mixer.init()
@@ -198,22 +190,26 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
             pygame.mixer.music.play()
             if KeyboardInterrupt:
                 pygame.mixer.music.stop()
-        elif 'empty bin' in query:
+        elif "how are u" in query:
+            assistant_speaks("I am fine what about u")
+        elif "I am also fine" in query:
+            assistant_speaks("Same here talk to me more")
+        elif 'empty Bin' in query:
             winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
             assistant_speaks("Recycle Bin Recycled")
-        elif "why you came to world" in query:
-            assistant_speaks("I cam because of github my mom, my dad shourya. He hosted code on github and now I am married to python without whom i cannot be more bro_code")
-        elif "Are u enemy of siri" in query or "are u friend of siri"in query or "is google your friend" in query or "is google your enemy" or "is alexa your enemy" in query or "are u friend of alexa":
+        elif "why you came to this world" in query:
+            assistant_speaks("I came because of github my mom, my dad shourya. He hosted code on github and now I am married to python without whom i cannot be more bro_code")
+        elif "is Siri your enemy" in query or "is Siri your friend" in query or "is Google your friend" in query or "is Google your enemy" in query or "is Alexa your enemy" in query or "is Alexa your friend" in query:
             assistant_speaks("It doesnot matter, it is my privacy, but we all are good chit chatter. Google is my best pal")
-        elif "Are u married" in query or "are u married" in query:
+        elif "Are you married" in query or "are you married" in query:
             assistant_speaks("I am married to python, earlier my girlfriend was google")
-        elif "which is best language" in query or "which is best language" in query:
+        elif "best language" in query or "which is best language" in query:
             assistant_speaks("English is my supported language till now but I like python for coding.")
-        elif "what is your best quote" in query:
+        elif "your best quote" in query:
             assistant_speaks("My best quote is print('hello world')")
         elif "jokes"in query or "jokes" in query:
             assistant_speaks(pyjokes.get_joke())
-        elif "why were u created " in query:
+        elif "you created" in query:
             assistant_speaks("To help desktop users, pi users and making best ai for desktop rather than siri or google")    
         elif "update assistant" in query:
             from alive_progress import alive_bar
@@ -227,7 +223,20 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
                     sleep(0.05)
                     if i:
                         Pypdf.write(r.content)
+        
+        elif "what is" in query or "who is" in query or "convert" in query:
+            app_id = "39AW66-9HU3K3AWKL"
+            client = wolframalpha.Client(app_id)
+            res = client.query(query)
 
+            try:
+                print(next(res.results).text)
+                assistant_speaks(next(res.results).text)
+            except StopIteration:
+                print("No results")
+        else:
+            if "hi" in query or "hey" in query or "hay" in query or "hai" in query:
+                assistant_speaks("Hi , what is going on")
 
 """def mailer():    
     if"send a mail" in query:
