@@ -43,7 +43,7 @@ def ai_mic():  # using mic to recognize and declaring text
             mic.pause_threshold = 3
             print("Recongnizing text ....")
             try:
-                query = mic.recognize_google(audio, language='en-UK')
+                query = mic.recognize_google(audio, language='en-IN')
                 print(f"User said: {query}\n")
             except Exception as e:
                 assistant_speaks("could not understand your words try again")
