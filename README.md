@@ -17,5 +17,6 @@ Windows version is easy downloading plug and play, more versions will come in fu
 
 
  <h2>Join our discord now pls </h2>
+<img src="https://discordapp.com/api/guilds/[757875230084431947]/widget.png?style=banner4" alt="Discord Banner 4"/>
 
-![Discord Banner 4](https://discordapp.com/api/guilds/[757875230084431947]/widget.png?style=banner4)
+
