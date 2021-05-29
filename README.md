@@ -18,4 +18,4 @@ Windows version is easy downloading plug and play, more versions will come in fu
 
  <h2>Join our discord now pls </h2>
 
-![Discord Banner 4](https://discordapp.com/api/guilds/[https://discord.gg/XzD4NQJTcR]/widget.png?style=banner4)
+![Discord Banner 4](https://discordapp.com/api/guilds/[757875230084431947]/widget.png?style=banner4)
