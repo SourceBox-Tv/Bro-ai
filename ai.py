@@ -1,4 +1,4 @@
-import alive_progress
+
 import speech_recognition as sr
 from gtts import gTTS
 import playsound
@@ -207,18 +207,18 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
         elif "you created" in query:
             assistant_speaks("To help desktop users, pi users and making best ai for desktop rather than siri or google")    
         elif "update assistant" in query:
-            from alive_progress import alive_bar
+            from clint.textui import progress
             assistant_speaks("After downloading file please replace this file with the downloaded one")
             url = 'https://raw.githubusercontent.com/SourceBox-Tv/Bro-aiwithpython/master/ai.py'
             r = requests.get(url, stream=True)
-            with alive_bar(100, bar='blocks', spinner = 'fish'):
-                with open("ai.py",'wb') as Pypdf:
-                     total_length = int(r.headers.get('content-length'))
-                for i in alive_progress(r.iter_content(chunk_size = 2391975),expected_size =(total_length / 1024) + 1):
-                    sleep(0.05)
-                    if i:
-                        Pypdf.write(r.content)
-        
+            with open("ai.py", "wb") as Pypdf:
+                 
+                total_length = int(r.headers.get('content-length'))
+                 
+                for ch in progress.bar(r.iter_content(chunk_size = 2391975),
+                                       expected_size =(total_length / 1024) + 1):
+                    if ch:
+                      Pypdf.write(ch)
         elif "what is" in query or "who is" in query or "convert" in query:
             app_id = "39AW66-9HU3K3AWKL"
             client = wolframalpha.Client(app_id)
