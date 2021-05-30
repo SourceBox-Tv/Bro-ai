@@ -11,6 +11,7 @@ Plus if u downloaded this ai sourcecode goto cmd and install using code <pip ins
 Download windows version from here https://github.com/SourceBox-Tv/Bro-aiwithpython/releases/latest/
  
 Windows version is easy downloading plug and play, more versions will come in future with diffrent os.
+Bro could run on any os but windows is what we support for now in issues other os will roll out support
 
  
  To update assistant,start assistant using exe or the setup folder with ai.py and say "update assistant"
