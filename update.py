@@ -39,11 +39,6 @@ def otherupdates():
                             Pypdf.write(ch)
 def main():
         if __name__ == '__main__':
-             if platform.system() == "Windows":
-                upadated()
-                filres()
-                os.remove(filename)
-             else:
-                otherupdates()
-                filres()
-                os.remove(filename)
+            upadated()
+            filres()
+            os.remove(filename)
