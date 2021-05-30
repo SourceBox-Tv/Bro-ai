@@ -5,12 +5,18 @@ Its a really cool ai and it is call Bro code written in python made by Sourcebox
 For now any  quries or wanted feature open issues
 
 
-Plus if u downloaded this ai goto python and install using code <pip install -r requirements.txt> in the directory of the folder.
+Plus if u downloaded this ai sourcecode goto cmd and install using code <pip install -r requirements.txt> in the directory of the folder.
 
  
-Download windows version from here https://github.com/SourceBox-Tv/Bro-aiwithpython/releases/download/1.2-alpha/ai.exe
+Download windows version from here https://github.com/SourceBox-Tv/Bro-aiwithpython/releases/download/Bro1.0/app.zip
  
 Windows version is easy downloading plug and play, more versions will come in future with diffrent os.
 
  
  To update assistant,start assistant using exe or the setup folder with ai.py and say "update assistant"
+
+
+ <h2>Join our discord now pls </h2>
+ 
+https://discord.gg/gGugvbs
+
