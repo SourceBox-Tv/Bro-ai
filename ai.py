@@ -172,21 +172,26 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
                 name = query
                 assistant_speaks("thnks for naming me" + name)
         elif "where is" in query:
-            query = query.replace("Where is", " ") or query.replace("where is", "")
+            query = query.replace("where is", " ") or query.replace("where is", "")
             assistant_speaks("You asked for"+ query)
             webbrowser.open("https://www.google.com/maps/place/"+ query)
+            time.sleep(5)
         elif "my name" in query:
             assistant_speaks(uname)
         elif "nothing going on" in query or "having depression" in query or "having panic" in query:
             pygame.mixer.init()
             pygame.mixer.music.load(".\sounds\moonlight.mp3")
+            assistant_speaks("Take a deep breath, look closely inside you and drink a glass of water and just relax and chill.")
+            assistant_speaks("Life is not ending its just every day new beginning, so stop overthink")
+            assistant_speaks("So last advice as AI ; You are master of senses and control of imagination think beyond what others think  and  solve the life's equation , to win it")
+            print("Press ctrl + c to quit music and continue ai")
             try:
                 pygame.mixer.music.play()
                 time.sleep(330)
             except: 
                 if KeyboardInterrupt:
                     pygame.mixer.quit()
-        elif "what can u do" in query or "What can u do" in query:
+        elif "can u do" in query or "can u do" in query:
             assistant_speaks("I can search you internet, youtube and also i can play u music when on music click playlist button to hear youtube songs, I can also search wikipedia for u , i can calculate, I can tell u some great jokes. Last we will be great pals have some chit chat with me")
             assistant_speaks("To open maps say where is , to open browser say search , to use youtube say Youtube, to open music say play music, to check time say what is time now")
         elif "how are you" in query:
@@ -196,7 +201,7 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
         elif 'empty Bin' in query:
             winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
             assistant_speaks("Recycle Bin Recycled")
-        elif "why you came to this world" in query:
+        elif "came to this world" in query:
             assistant_speaks("I came because of github my mom, my dad shourya. He hosted code on github and now I am married to python without whom i cannot be more bro_code")
         elif "is Siri your enemy" in query or "is Siri your friend" in query or "is Google your friend" in query or "is Google your enemy" in query or "is Alexa your enemy" in query or "is Alexa your friend" in query:
             assistant_speaks("It doesnot matter, it is my privacy, but we all are good chit chatter. Google is my best pal")
@@ -211,22 +216,19 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
         elif "you created" in query:
             assistant_speaks("To help desktop users, pi users and making best ai for desktop rather than siri or google")    
         elif "update assistant" in query:
-            from clint.textui import progress
-            assistant_speaks("After downloading file please replace this file with the downloaded one and restart the software")
-            url = ["https://raw.githubusercontent.com/SourceBox-Tv/Bro-aiwithpython/master/ai.py",
-             "https://raw.githubusercontent.com/SourceBox-Tv/Bro-aiwithpython/master/vlcgui.py",
-              "https://raw.githubusercontent.com/SourceBox-Tv/Bro-aiwithpython/master/screenshots.py"]
-            
-            files = ["ai.py","screenshot.py","vlcgui.py"]
-            for url, files in zip(url,files):
-                r = requests.get(url, stream=True)
-                with open(files, "wb") as Pypdf:
-                    total_length = int(r.headers.get('content-length'))
-                 
-                    for ch in progress.bar(r.iter_content(chunk_size = 2391975),
-                                       expected_size =(total_length / 1024) + 1):
-                        if ch:
-                            Pypdf.write(ch)
+            import update
+            update.main()
+        elif "marry me" in query:
+            assistant_speaks("No I am happiliy married to python")
+        elif "you born" in query:
+            assistant_speaks("In happy month of your birthday")
+            pygame.init()
+            pygame.mixer.music.load(".\sounds\lol.mp3")
+            assistant_speaks("LOL")
+            pygame.mixer.music.play()
+            time.sleep(2)
+            pygame.mixer.stop()
+            assistant_speaks("In reality I was born in 28th of may 2021")
         elif "what is" in query or "who is" in query or "convert" in query:
             app_id = "39AW66-9HU3K3AWKL"
             client = wolframalpha.Client(app_id)
@@ -245,6 +247,7 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
         else:
             if "hi" in query or "hey" in query or "hay" in query or "hai" in query:
                 assistant_speaks("Hi , what is going on")
+                assistant_speaks("To have fun with me ask me what can u do")
 
 """def mailer():    
     if"send a mail" in query:
