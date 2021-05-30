@@ -8,13 +8,14 @@ For now any  quries or wanted feature open issues
 Plus if u downloaded this ai sourcecode goto cmd and install using code <pip install -r requirements.txt> in the directory of the folder.
 
  
-Download windows version from here https://github.com/SourceBox-Tv/Bro-aiwithpython/releases/download/Bro1.0/app.zip
+Download windows version from here https://github.com/SourceBox-Tv/Bro-aiwithpython/releases/latest/
  
 Windows version is easy downloading plug and play, more versions will come in future with diffrent os.
 
  
  To update assistant,start assistant using exe or the setup folder with ai.py and say "update assistant"
 
+ what can it do, just ask him. But for example it can play specific video on youtube,search youtube,play music, play media, search net, keep u out of panic or deepression , take screenshot, change his name,ask jokes, ask question or even calculate him or ask time etc basically have fun other updates will come to this in future.
 
  <h2>Join our discord now pls </h2>
  
