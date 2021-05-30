@@ -15,6 +15,7 @@ Windows version is easy downloading plug and play, more versions will come in fu
  
  To update assistant,start assistant using exe or the setup folder with ai.py and say "update assistant"
 
+ <bR>what can it do, just ask him. But for example it can play specific video on youtube,search youtube,play music, play media, search net, keep u out of panic or deepression , take screenshot, change his name,ask jokes other updates will come to this in future. </br>
 
  <h2>Join our discord now pls </h2>
  
