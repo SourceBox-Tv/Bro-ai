@@ -13,7 +13,6 @@ import wikipedia
 import webbrowser
 import os
 import pyjokes
-import requests
 import pygame
 import vlcgui
 from time import ctime
