@@ -18,7 +18,6 @@ import pygame
 import vlcgui
 from time import ctime
 import time
-from urllib.request import urlopen
 import winshell
 import sys
 
