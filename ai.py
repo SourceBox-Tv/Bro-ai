@@ -18,9 +18,9 @@ import vlcgui
 from time import ctime
 import time
 import winshell
+import pywhatkit
 
-
-mics = int(input("Tell your mic port pls type :"))
+mics = int(input("Tell your mic port pls type (type 1 for default):"))
 num = 1
 
 
@@ -112,13 +112,17 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
             assistant_speaks("According to wiki ...")
             assistant_speaks(query)
             continue
+        elif 'play song' in query:
+            song = query.replace('play', '')
+            assistant_speaks('playing ' + song)
+            pywhatkit.playonyt(song)
 
-        elif "search" in query or 'find' in query:
+        elif "play music" in query or "play song" in query or "play video":
             assistant_speaks("Searching globaly")
             searches = query.replace('search', "") or query.replace('find', "")
             webbrowser.open("https://www.google.com/search?q=" + searches)
             time.sleep(5)
-        elif "play music" in query or "play song" in query:
+        elif "play media" in query:
             vlcgui.main()
         elif "time now" in query:
             times()
@@ -190,7 +194,7 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
             except: 
                 if KeyboardInterrupt:
                     pygame.mixer.quit()
-        elif "can u do" in query or "can u do" in query:
+        elif "can you do" in query:
             assistant_speaks("I can search you internet, youtube and also i can play u music when on music click playlist button to hear youtube songs, I can also search wikipedia for u , i can calculate, I can tell u some great jokes. Last we will be great pals have some chit chat with me")
             assistant_speaks("To open maps say where is , to open browser say search , to use youtube say Youtube, to open music say play music, to check time say what is time now")
         elif "how are you" in query:

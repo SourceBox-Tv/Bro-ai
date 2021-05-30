@@ -13,3 +13,4 @@ pafy
 gTTS
 PySimpleGUI
 youtube-dl
+pywhatkit
