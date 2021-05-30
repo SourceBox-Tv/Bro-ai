@@ -112,12 +112,12 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
             assistant_speaks("According to wiki ...")
             assistant_speaks(query)
             continue
-        elif 'play song' in query:
+        elif "play song" in query or "play music" in query:
             song = query.replace('play', '')
             assistant_speaks('playing ' + song)
             pywhatkit.playonyt(song)
 
-        elif "play music" in query or "play song" in query or "play video":
+        elif "search" in query or "find" in query:
             assistant_speaks("Searching globaly")
             searches = query.replace('search', "") or query.replace('find', "")
             webbrowser.open("https://www.google.com/search?q=" + searches)
