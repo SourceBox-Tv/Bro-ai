@@ -18,12 +18,17 @@ import pygame
 import vlcgui
 from time import ctime
 import time
+from urllib.request import urlopen
 import winshell
-
+import sys
 
 mics = int(input("Tell your mic port pls type :"))
 num = 1
 
+def resource_path(relative_path):
+    if hasattr(sys, '_MEIPASS'):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
 def assistant_speaks(output):  # this is for just adding gtts and removing its file
     global num
