@@ -9,7 +9,7 @@ def filres():
 def upadated():
             import requests
             from clint.textui import progress
-            print("After downloading file; it would be in zip file, please replace this file with the downloaded one")
+            print("After downloading file; it would be in app/setup folder, please replace this file with the downloaded one and restart software")
             url = ["https://github.com/SourceBox-Tv/Bro-aiwithpython/releases/download/Bro1.0/app.zip"]
             files = ["app.zip"]
             for url, files in zip(url,files):
