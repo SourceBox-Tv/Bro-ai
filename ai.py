@@ -41,7 +41,7 @@ def ai_mic():  # using mic to recognize and declaring text
             print("Listeningt text .....")
             mic.adjust_for_ambient_noise(source)
             audio = mic.listen(source)
-            mic.pause_threshold = 2.5
+            mic.pause_threshold = 2
             print("Recongnizing text ....")
             try:
                 query = mic.recognize_google(audio, language='en-IN')
@@ -105,7 +105,7 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
             webbrowser.open("https://www.youtube.com/results?search_query=" + youtubers)
             time.sleep(5)
             
-        elif "wikipedia" in query:
+        elif "Wikipedia" in query:
             assistant_speaks('Searching wiki on net ....')
             queryr = query.replace('Wikipedia', "")
             query = wikipedia.summary(queryr, sentences=3)
@@ -195,7 +195,7 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
                 if KeyboardInterrupt:
                     pygame.mixer.quit()
         elif "can you do" in query:
-            assistant_speaks("I can search you internet, youtube and also i can play u music when on music click playlist button to hear youtube songs, I can also search wikipedia for u , i can calculate, I can tell u some great jokes. Last we will be great pals have some chit chat with me")
+            assistant_speaks("I can search you internet, youtube and also i can play music when on music click playlist button to hear youtube songs, I can also search wikipedia for u , i can calculate, I can tell u some great jokes. Last we will be great pals have some chit chat with me")
             assistant_speaks("To open maps say where is , to open browser say search , to use youtube say Youtube, to open music say play music, to check time say what is time now")
         elif "how are you" in query:
             assistant_speaks("I am fine what about u")
@@ -219,8 +219,8 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
         elif "you created" in query:
             assistant_speaks("To help desktop users, pi users and making best ai for desktop rather than siri or google")    
         elif "update assistant" in query:
-            import update
-            update.main()
+            import goals
+            goals.main()
         elif "marry me" in query:
             assistant_speaks("No I am happiliy married to python")
         elif "you born" in query:
@@ -243,8 +243,8 @@ def commands():#sorry edit query was above loop , loop not iniated but anyways i
             except StopIteration:
                 print("No results")
         elif "screenshot" in query:
-            import screenshots
-            screenshots.screens()
+            import screenshot
+            screenshot.screens()
         elif "stop" in query:
             break;
         else:
