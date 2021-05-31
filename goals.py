@@ -28,7 +28,7 @@ def otherupdates():
               "https://raw.githubusercontent.com/SourceBox-Tv/Bro-aiwithpython/master/screenshots.py",
                "https://raw.githubusercontent.com/SourceBox-Tv/Bro-aiwithpython/master/goals.py"]
             
-            files = ["ai.py","screenshot.py","vlcgui.py","goals.py]
+            files = ["ai.py","screenshot.py","vlcgui.py","goals.py"]
             for url, files in zip(url,files):
                 rg = requests.get(url, stream=True)
                 with open(files, "wb") as Pypdf:
