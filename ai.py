@@ -213,7 +213,7 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                 assistant_speaks("English is my supported language till now but I like python for coding.")
             elif "your best quote" in input:
                 assistant_speaks("My best quote is print('hello world')")
-            elif "jokes"in input or "jokes" in input:
+            elif "jokes"in input or "joke" in input:
                 assistant_speaks(pyjokes.get_joke())
             elif "you created" in input:
                 assistant_speaks("To help desktop users, pi users and making best ai for desktop rather than siri or google")    
