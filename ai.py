@@ -1,4 +1,3 @@
-
 from typing import Text
 import speech_recognition as sr
 from gtts import gTTS
@@ -119,7 +118,7 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                 searches = input.replace('search', "") or input.replace('find', "")
                 webbrowser.open("https://www.google.com/search?q=" + searches)
                 time.sleep(5)
-            elif "play media" in input:
+            elif "play media" in input or "play video" in input:
                 vlcgui.main()
             elif "time now" in input:
                 times()
@@ -138,7 +137,7 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                     exit()
                 else:
                     subprocess.call(["shutdown", "/s"])
-            elif "hibernate PC" in input:
+            elif "Hibernate PC" in input:
                 assistant_speaks("Entering loggin off mode")
                 subprocess.call(["shutdown", "/l"])
             elif "restart PC" in input:
@@ -158,7 +157,7 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
             elif "who I am" in input:
                 assistant_speaks("If you talk then definately your human.")
             elif "who are you" in input:
-                assistant_speaks("what are YOU, I dont know and what I know is  I was made in India  I like Hindi but my creator doesn't like that but we all are the same so does shourya or source box helping me to make this artificial intelligence called bro code; lalalala we all dance  together ")
+                assistant_speaks("You know right I am Bro made with bro_code , starting my new company called BroAI")
             elif "who made you" in input or "created you" in input:
                 assistant_speaks("I was made by shourya wadhwa, In India")
             elif "what is love" in input:
@@ -177,9 +176,7 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                 webbrowser.open("https://www.google.com/maps/place/"+ input)
                 time.sleep(5)
             elif "my name" in input:
-                assistant_speaks(uname)
-            elif "change my name to" in input:
-                assistant_speaks(uname)
+                assistant_speaks("Your name is" + uname)
             elif "nothing going on" in input or "having depression" in input or "having panic" in input:
                 pygame.mixer.init()
                 pygame.mixer.music.load(".\sounds\moonlight.mp3")
@@ -192,7 +189,7 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                     time.sleep(330)
                 except: 
                     if KeyboardInterrupt:
-                        pygame.mixer.quit()
+                        pygame.mixer.quit()    
             elif "can you do" in input:
                 assistant_speaks("I can search you internet, youtube and also i can play music when on music click playlist button to hear youtube songs, I can also search wikipedia for u , i can calculate, I can tell u some great jokes. Last we will be great pals have some chit chat with me")
                 assistant_speaks("To open maps say where is , to open browser say search , to use youtube say Youtube, to open music say play music, to check time say what is time now")
@@ -274,4 +271,6 @@ if __name__ == '__main__':
          text = ai_mic()
          if text == 0:
             continue
+         elif str("stop") in text or ("quit") in text:
+             break;
          process_text(text)   
