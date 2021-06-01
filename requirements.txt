@@ -14,3 +14,4 @@ gTTS
 PySimpleGUI
 youtube-dl
 pywhatkit
+smptlib

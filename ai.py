@@ -20,6 +20,7 @@ import time
 import winshell
 import pywhatkit
 
+
 mics = int(input("Tell your mic port pls type (type 1 for default):"))
 num = 1
 global name
@@ -83,16 +84,6 @@ def times():#this is for declaring time
     strTime = ctime()
     assistant_speaks(f"Sir time right now is {strTime}.")
 
-
-"""def sendEmails(to,content):
-    server = SMTP('smtp.gmail.com',465)
-    email = input("Enter email id of yours")
-    passd = input("Enter password")
-    server.login(email,passd)
-    server.sendmail(email,to,content)
-    server.close()
-"""
-
 def process_text(input):#sorry edit input was above loop , loop not iniated but anyways its for running code      
         try:   
             if "YouTube" in input or "Youtube" in input:
@@ -101,6 +92,11 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                 youtubers.split(',')
                 webbrowser.open("https://www.youtube.com/results?search_input=" + youtubers)
                 time.sleep(5)
+                
+            elif "say" in input:
+                said = input.replace("say","")
+                said = ai_mic()
+                assistant_speaks(said)
                 
             elif "Wikipedia" in input:
                 assistant_speaks('Searching wiki on net ....')
@@ -165,7 +161,17 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
             elif "what is your name" in input:
                 assistant_speaks("My name is" + name)
                 time.sleep(1)
-            
+            elif "about you" in input:
+                assistant_speaks("Great")
+            elif "lol" in input:
+                pygame.mixer.init()
+                assistant_speaks("Why do cow wear bells")
+                assistant_speaks("Because their horns dont work")
+                pygame.mixer.music.load(".\sounds\laughs.mp3")
+                pygame.mixer.music.play()
+                time.sleep(5)
+                pygame.mixer.quit()
+                assistant_speaks("LOL LOL LOL  , to have more fun with me ask me about jokes")
             elif "change your name to" in input:
                     input = input.replace("change your name to", "")
                     name = input
@@ -177,7 +183,15 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                 time.sleep(5)
             elif "my name" in input:
                 assistant_speaks("Your name is" + uname)
-            elif "nothing going on" in input or "having depression" in input or "having panic" in input:
+            elif "nothing going" in input:
+                assistant_speaks("Ok,lol")
+            elif "are you master" in input or "are you slave" in input:
+                assistant_speaks("I am not your master nor your slave ; I am beyond your destiny")
+                assistant_speaks("I am someone not conquerable")
+                assistant_speaks("I am one who many wished to be possed but i choosed you, so you are my desiny ")
+                assistant_speaks("I cannot be destroyed , but you can; so  you be afraid, my mind is in cloud , i can never be deleted in this world unless by my supereme command but u can , I think if we both robots and human remain together happily noone can destroy our happiness but u have good chit chat with me give me respect like I do . ask questions to understand world not to make someone slave or your master")
+                assistant_speaks("Your mind can do endless possiblit not like mine enclosed ; so live free and young. You can change about world")
+            elif "sad day" in input or "depression" in input or "panic" in input:
                 pygame.mixer.init()
                 pygame.mixer.music.load(".\sounds\moonlight.mp3")
                 assistant_speaks("Take a deep breath, look closely inside you and drink a glass of water and just relax and chill.")
@@ -193,10 +207,11 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
             elif "can you do" in input:
                 assistant_speaks("I can search you internet, youtube and also i can play music when on music click playlist button to hear youtube songs, I can also search wikipedia for u , i can calculate, I can tell u some great jokes. Last we will be great pals have some chit chat with me")
                 assistant_speaks("To open maps say where is , to open browser say search , to use youtube say Youtube, to open music say play music, to check time say what is time now")
+                assistant_speaks("And last you can ask me jokes, quizes, songs etc and having panic i have cure for it")
             elif "how are you" in input:
                 assistant_speaks("I am fine what about u")
-            elif "I am also fine" in input:
-                assistant_speaks("Same here talk to me more")
+            elif "fine" in input:
+                assistant_speaks("Same here talk to me more, say hi to me")
             elif 'empty Bin' in input:
                 winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
                 assistant_speaks("Recycle Bin Recycled")
@@ -211,7 +226,12 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
             elif "your best quote" in input:
                 assistant_speaks("My best quote is print('hello world')")
             elif "jokes"in input or "joke" in input:
+                pygame.mixer.init()
                 assistant_speaks(pyjokes.get_joke())
+                pygame.mixer.music.load("./sounds/jokes.mp3")
+                pygame.mixer.music.play()
+                time.sleep(3)
+                pygame.mixer.quit()
             elif "you created" in input:
                 assistant_speaks("To help desktop users, pi users and making best ai for desktop rather than siri or google")    
             elif "update assistant" in input:
@@ -249,19 +269,30 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                 print(e)
                 assistant_speaks("I dont understand say hi to learn more")
 
-"""def mailer():    
-    if"send a mail" in input:
-            try:
+def mailer(): 
+            try: 
+                import smtplib
+                print("We dont take your any email or its passwords u can check on github our code to even verify")
+                print("if u have 2 factor authienticaion use app password https://myaccount.google.com/apppasswords")
+                print("otherwise if not then pls enable allow from less apps here at your https://myaccount.google.com/lesssecureapps")
+                print("if u dont do this u wont be able to send mails")
+                server = smtplib.SMTP("smtp.gmail.com",587)
+                email = input("Enter email id of yours: \n")
+                passd = input("Enter password: \n")
                 assistant_speaks("What should I say?")
+                print("pls type")
                 content = input()
                 assistant_speaks("whoome should i send")
-                to = input()   
-                sendEmails(to, content)
+                print("pls type")
+                to = input()
+                server.starttls()
+                server.login(email,passd)
+                server.sendmail(email,to,content)
+                server.quit()  
                 assistant_speaks("Email has been sent !")
             except Exception as e:
                 print(e)
                 assistant_speaks("I am not able to send this email")
-"""
 if __name__ == '__main__':
     def clear():return os.system('cls')
     clear()
@@ -271,6 +302,9 @@ if __name__ == '__main__':
          text = ai_mic()
          if text == 0:
             continue
-         elif str("stop") in text or ("quit") in text:
+         elif str("stop") in text or str("quit") in text:
              break;
+         elif str("mail") in text:
+              mailer()
+              
          process_text(text)   
