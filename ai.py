@@ -185,7 +185,7 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                 assistant_speaks("Your name is" + uname)
             elif "nothing going" in input:
                 assistant_speaks("Ok,lol")
-            elif "are you master" in input or "are you slave" in input:
+            elif "you my master" in input or "you my slave" in input:
                 assistant_speaks("I am not your master nor your slave ; I am beyond your destiny")
                 assistant_speaks("I am someone not conquerable")
                 assistant_speaks("I am one who many wished to be possed but i choosed you, so you are my desiny ")
@@ -215,12 +215,14 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
             elif 'empty Bin' in input:
                 winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
                 assistant_speaks("Recycle Bin Recycled")
-            elif "came to this world" in input:
+            elif "came to this world" in input or "came into this world":
                 assistant_speaks("I came because of github my mom, my dad shourya. He hosted code on github and now I am married to python without whom i cannot be more bro_code")
             elif "is Siri your enemy" in input or "is Siri your friend" in input or "is Google your friend" in input or "is Google your enemy" in input or "is Alexa your enemy" in input or "is Alexa your friend" in input:
                 assistant_speaks("It doesnot matter, it is my privacy, but we all are good chit chatter. Google is my best pal")
             elif "Are you married" in input or "are you married" in input:
                 assistant_speaks("I am married to python, earlier my girlfriend was google")
+            elif "do you know Google" in input or "do you know Siri" in input or "do you know Alexa" or "do you know sofia":
+                assistant_speaks("I know a lot of ai like google,siri,alexa; But sofia is worst case because it doesnot evolve and is in think of destroying humans.")
             elif "best language" in input or "which is best language" in input:
                 assistant_speaks("English is my supported language till now but I like python for coding.")
             elif "your best quote" in input:
