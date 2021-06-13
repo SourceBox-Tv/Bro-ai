@@ -37,4 +37,4 @@ If you have any feedback, please open a issue.
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
-![Discord](https://img.shields.io/discord/757875229656875080?style=flat-square)(https://discord.gg/gGugvbs)
+![Discord](https://img.shields.io/discord/757875229656875080?style=flat-square)](https://discord.gg/gGugvbs)
