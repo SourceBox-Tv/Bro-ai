@@ -18,11 +18,6 @@ Bro could run on any os but windows is what we support for now in issues other o
 
  what can it do, just ask him. But for example it can play specific video on youtube,search youtube,play music, play media, search net, keep u out of panic or deepression , take screenshot, change his name,ask jokes, ask question or even calculate him or ask time etc basically have fun other updates will come to this in future.
 
- <h2>Join our discord now pls </h2>
- 
-https://discord.gg/gGugvbs
-
-
 ## Authors
 
 - [@Coderlogy](https://github.com/CoderLogy)
@@ -42,4 +37,4 @@ If you have any feedback, please open a issue.
 
 [![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
 
-![Discord](https://img.shields.io/discord/757875229656875080?style=flat-square)
+![Discord](https://img.shields.io/discord/757875229656875080?style=flat-square)(https://discord.gg/gGugvbs)
