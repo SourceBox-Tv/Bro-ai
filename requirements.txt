@@ -8,9 +8,8 @@ python_vlc
 pyjokes
 wolframalpha
 clint
-playsound
 pafy
-gTTS
+pyttsx3
 PySimpleGUI
 youtube-dl
 pywhatkit

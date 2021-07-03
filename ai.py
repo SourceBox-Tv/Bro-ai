@@ -1,8 +1,7 @@
 from typing import Text
 import speech_recognition as sr
-from gtts import gTTS
 import playsound
-import os  # to save/open files
+import os  
 import datetime
 import subprocess
 import wolframalpha
@@ -19,6 +18,7 @@ from time import ctime
 import time
 import winshell
 import pywhatkit
+import pyttsx3
 
 
 mics = int(input("Tell your mic port pls type (type 1 for default):"))
@@ -28,14 +28,14 @@ global names
 name = ("Bro 1.0")
 
 def assistant_speaks(output):  # this is for just adding gtts and removing its file
-    global num
-    num += 1
-    print(name +":", output)
-    toSpeak = gTTS(text=output, lang='en-IN', slow=False)
-    file = str(num)+".mp3 "
-    toSpeak.save(file)
-    playsound.playsound(file, True)
-    os.remove(file)
+    engine = pyttsx3.init()
+    engine.setProperty("rate", 130)
+    voices = engine.getProperty('voices')
+    engine.setProperty('voice', voices[2].id)
+    engine.say(output)
+    print(output)
+    engine.runAndWait()
+    engine.stop()
     
 def ai_mic():  # using mic to recognize and declaring text
         mic = sr.Recognizer()
@@ -43,7 +43,7 @@ def ai_mic():  # using mic to recognize and declaring text
         with sr.Microphone(device_index=mics) as source:
             print("Listeningt text .....")
             mic.adjust_for_ambient_noise(source)
-            audio = mic.listen(source,phrase_time_limit=10)
+            audio = mic.listen(source,phrase_time_limit=10,timeout=100)
             assistant_speaks("Recognizing text ....")
             try:
                 texts = mic.recognize_google(audio, language='en-IN')
@@ -102,20 +102,20 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                 elif "Wikipedia" in input:
                     assistant_speaks('Searching wiki on net ....')
                     inputr = input.replace('bro Wikipedia', "")
-                    input = wikipedia.summary(inputr, sentences=3)
+                    input = wikipedia.summary(inputr, sentences=2)
                     assistant_speaks("According to wiki ...")
                     assistant_speaks(input)
-                elif "play song" in input or "play music" in input:
-                    song = input.replace('bro play', '')
+                elif "song" in input or "music" in input:
+                    song = input.replace('bro song', '') or input.replace('bro music','')
                     assistant_speaks('playing ' + song)
                     pywhatkit.playonyt(song)
 
                 elif "search" in input or "find" in input:
                     assistant_speaks("Searching globaly")
-                    searches = input.replace('bro search', "") or input.replace('find', "")
+                    searches = input.replace('bro search', " ") or input.replace('find', " ")
                     webbrowser.open("https://www.google.com/search?q=" + searches)
                     time.sleep(5)
-                elif "play media" in input or "play video" in input:
+                elif " play media" in input or " play video" in input:
                     vlcgui.main()
                 elif "time now" in input:
                     times()
@@ -140,6 +140,9 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                 elif "restart PC" in input:
                     assistant_speaks("Entering restarting mode")
                     subprocess.call(["shutdown", "/r"])
+                elif "you know" in input:
+                    assistant_speaks("I know ")
+                    assistant_speaks("You can ask me to search or wikipedia")
                 elif " calculate" in input:
                     app_id = "39AW66-9HU3K3AWKL"
                     client = wolframalpha.Client(app_id)
@@ -169,6 +172,15 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                     time.sleep(5)
                     pygame.mixer.quit()
                     assistant_speaks("LOL LOL LOL  , to have more fun with me ask me about jokes")
+                elif "bye" in inputs or "thank you" in inputs:
+                    try:
+                        assistant_speaks("Sleeping sir bye have a good day")
+                        boms = 10000
+                        print("Press ctrl+c to exit sleep")
+                        time.sleep(boms)
+                    except:
+                        if KeyboardInterrupt:
+                            pass
                 elif "change your name to" in input:
                         inputr = input.replace("bro change your name to", " ")
                         name = inputr
@@ -213,7 +225,7 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                     winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
                     assistant_speaks("Recycle Bin Recycled")
                 elif "came to this world" in input or "came into this world" in input:
-                    assistant_speaks("I came because of github my mom, my dad shourya. He hosted code on github and now I am married to python without whom i cannot be more bro_code")
+                    assistant_speaks("Take it as not joke,I was made by shourya wadhwa to help pi users and desktop users as I feel sad there was not good desktop ai so I came to sourceboxtv github and now I am married to python and living happily ; I wish i should come earlier")
                 elif "is Siri your enemy" in input or "is Siri your friend" in input or "is Google your friend" in input or "is Google your enemy" in input or "is Alexa your enemy" in input or "is Alexa your friend" in input:
                     assistant_speaks("It doesnot matter, it is my privacy, but we all are good chit chatter. Google is my best pal")
                 elif "Are you married" in input or "are you married" in input:
@@ -238,7 +250,7 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                     goals.main()
                 elif "marry me" in input:
                     assistant_speaks("No I am happiliy married to python")
-                elif "you born" in input:
+                elif "you born" in input or "your birthday" in input:
                     assistant_speaks("In happy month of your birthday")
                     pygame.init()
                     pygame.mixer.music.load(".\sounds\lol.mp3")
@@ -257,21 +269,26 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                         assistant_speaks(next(res.results).text)
                     except StopIteration:
                         print("No results")
-                elif "bye" in input:
-                    assistant_speaks("Sleeping sir bye have a good day")
-                    bom = int(input("tell time to sleep"))
-                    time.sleep(bom)
                 elif "stop" in input:
                     exit()    
                 elif "screenshot" in input:
                     import screenshot
                     screenshot.screens()
-                elif "bro hi" in input or "bro hey" in input or "bro hay" in input or "bro hai" in input:
+                elif "bro hi" in input or "bro hey" in input or "bro hay" in input or "bro hai" in input or "hi" in input or "hai" in input:
                         assistant_speaks("Hi , what is going on")
                         assistant_speaks("To have fun with me ask me what can u do")
+                elif "ok" in input:
+                    assistant_speaks("ok haha")
+                elif str("mail") in inputs:
+                    import mails
+                    mails.mailer()
+                else:
+                    assistant_speaks("Sorry I dont understand say hi")
             except Exception as e:
                     print(e)
                     assistant_speaks("I dont understand say hi to learn more")
+
+hoj ="cross"
 WAKE = "bro"
 print("Start")
 while True:
@@ -280,7 +297,5 @@ while True:
         continue
     if lok.count(WAKE) > 0:
         process_text(inputs)
-    elif str("mail") in inputs:
-        import mails
-        mails.mailer()
-        
+    elif len(hoj) > 0:
+            process_text(inputs)
