@@ -1,7 +1,5 @@
 from typing import Text
 import speech_recognition as sr
-import playsound
-import os  
 import datetime
 import subprocess
 import wolframalpha
@@ -10,22 +8,23 @@ import speech_recognition as sr
 import datetime
 import wikipedia
 import webbrowser
-import os
 import pyjokes
 import pygame
 import vlcgui
+import ctypes
 from time import ctime
-import time
 import winshell
 import pywhatkit
 import pyttsx3
-
+import re
+import requests
+from bs4 import BeautifulSoup
 
 mics = int(input("Tell your mic port pls type (type 1 for default):"))
 num = 1
 global name
 global names
-name = ("Bro 1.0")
+name = (" Bro 1.0")
 
 def assistant_speaks(output):  # this is for just adding gtts and removing its file
     engine = pyttsx3.init()
@@ -40,13 +39,14 @@ def assistant_speaks(output):  # this is for just adding gtts and removing its f
 def ai_mic():  # using mic to recognize and declaring text
         mic = sr.Recognizer()
         audio = ''
+        mic.pause_threshold = 1
         with sr.Microphone(device_index=mics) as source:
             print("Listeningt text .....")
             mic.adjust_for_ambient_noise(source)
-            audio = mic.listen(source,phrase_time_limit=10,timeout=100)
+            audio = mic.listen(source,phrase_time_limit=30,timeout=100)
             assistant_speaks("Recognizing text ....")
             try:
-                texts = mic.recognize_google(audio, language='en-IN')
+                texts = mic.recognize_google(audio, language='en')
                 global lok
                 lok = texts
                 print(f"User said: {texts}\n")
@@ -85,85 +85,111 @@ def times():#this is for declaring time
     strTime = ctime()
     assistant_speaks(f"Sir time right now is {strTime}.")
 
-def process_text(input):#sorry edit input was above loop , loop not iniated but anyways its for running code      
-            try:   
-                if "YouTube" in input or "Youtube" in input:
+def process_text(query):#sorry edit query was above loop , loop not iniated but anyways its for running code      
+            try:  
+                import time 
+                if "YouTube" in query or "Youtube" in query:
                     assistant_speaks("Here on youtube")
-                    youtubers = input.replace('bro YouTube', " ") or input.replace('bro Youtube', " ")
+                    youtubers = query.replace('YouTube', " ") or query.replace('Youtube', " ")
                     youtubers.split(',')
-                    webbrowser.open("https://www.youtube.com/results?search_input=" + youtubers)
+                    webbrowser.open("https://www.youtube.com/results?search_query=" + youtubers)
                     time.sleep(5)
                     
-                elif "say" in input:
-                    said = input.replace(" bro say","")
+                elif "say" in query or "repeat" in query:
+                    said = query.replace("say","") or query.replace("repeat"," ")
                     said = ai_mic()
                     assistant_speaks(said)
-                    
-                elif "Wikipedia" in input:
-                    assistant_speaks('Searching wiki on net ....')
-                    inputr = input.replace('bro Wikipedia', "")
-                    input = wikipedia.summary(inputr, sentences=2)
-                    assistant_speaks("According to wiki ...")
-                    assistant_speaks(input)
-                elif "song" in input or "music" in input:
-                    song = input.replace('bro song', '') or input.replace('bro music','')
-                    assistant_speaks('playing ' + song)
-                    pywhatkit.playonyt(song)
-
-                elif "search" in input or "find" in input:
+                
+                elif "search" in query or "find" in query:
                     assistant_speaks("Searching globaly")
-                    searches = input.replace('bro search', " ") or input.replace('find', " ")
+                    searches = query.replace('bro search', " ") or query.replace('find', " ")
                     webbrowser.open("https://www.google.com/search?q=" + searches)
                     time.sleep(5)
-                elif " play media" in input or " play video" in input:
-                    vlcgui.main()
-                elif "time now" in input:
+                
+                elif "temperature" in query or "weather" in query:
+                    url = f"https://www.google.com/search?q={query}"
+                    html = requests.get(url).content
+                    soup = BeautifulSoup(html, 'html.parser')
+                    temp = soup.find('div', attrs={'class': 'BNeawe iBp4i AP7Wnd'}).text
+                    str = soup.find('div', attrs={'class': 'BNeawe tAd8D AP7Wnd'}).text
+                    strTime = datetime.datetime.now().strftime("%H:%M:%S")
+                    data = str.split('\n')
+                    timed = data[0]
+                    sky = data[1]
+                    listdiv = soup.findAll('div', attrs={'class': 'BNeawe s3v9rd AP7Wnd'})
+                    strd = listdiv[5].text
+                    if "Tomorrow" in query or "tomorrow" in query or "Tomorrow 's" in query:
+                        assistant_speaks(f"Tommorow weather is {sky} with a temperature of {temp} on {timed}")
+                    else:
+                        assistant_speaks(f"Today's weather is {sky} with a temperature of {temp} on {timed} in {place}")
+                    
+                elif "time" in query:
                     times()
-                elif "bro code" in input:
-                    global name
-                    name = ("Bro 1.0")
-                    wishMe()
-                    assistant_speaks("Sir Bro 1.0 in your service")
-                elif "shutdown PC" in input:
+                elif "Wikipedia" in query or "why" in query or "vi" in query or "what" in query:
+                    try:
+                        assistant_speaks('Searching wiki on net ....')
+                        queryr = query.replace('Wikipedia', "") or query.replace("vi","") or query.replace("why","") or query.replace("what","")
+                        queryd = wikipedia.summary(queryr, sentences=2)
+                        assistant_speaks("According to wiki ...")
+                        assistant_speaks(queryd)
+                    except Exception as e:
+                        pot = assistant_speaks(wikipedia.suggest(queryr))
+                        assistant_speaks("Gueesing it")
+                        assistant_speaks(pot)
+                    assistant_speaks("Want to continue")
+                    query = ai_mic()
+                    if(query == "yes"):
+                        queryd = wikipedia.summary(queryr,sentences="5")
+                        assistant_speaks(queryd)
+                    else:
+                        KeyboardInterrupt
+                elif "song" in query or "music" in query:
+                    song = query.replace('song', '') or query.replace('music','')
+                    assistant_speaks('playing ' + song)
+                    pywhatkit.playonyt(song)
+                    
+                elif "play media" in query or "play video" in query:
+                    vlcgui.main()
+                elif "shutdown PC" in query:
                     assistant_speaks("3")
                     assistant_speaks("2")
                     assistant_speaks("1")
                     assistant_speaks("Closing pc do u still want to continue")
                     time.sleep(1)
-                    if 'no' in input:
+                    if 'no' in query:
                         exit()
                     else:
                         subprocess.call(["shutdown", "/s"])
-                elif "Hibernate PC" in input or "Log off" in input:
+                elif 'lock window' in query:
+                    assistant_speaks("locking the device")
+                    ctypes.windll.user32.LockWorkStation()
+                elif "Hibernate PC" in query or "Log off" in query:
                     assistant_speaks("Entering loggin off mode")
                     subprocess.call(["shutdown", "/l"])
-                elif "restart PC" in input:
+                elif "restart PC" in query:
                     assistant_speaks("Entering restarting mode")
                     subprocess.call(["shutdown", "/r"])
-                elif "you know" in input:
+                elif "you know" in query:
                     assistant_speaks("I know ")
                     assistant_speaks("You can ask me to search or wikipedia")
-                elif " calculate" in input:
+                elif "calculate" in query:
                     app_id = "39AW66-9HU3K3AWKL"
                     client = wolframalpha.Client(app_id)
-                    indexr = input.lower().split().index('calculate')
-                    res = client.query(''.join(input))
+                    indexr = query.lower().split().index('calculate')
+                    res = client.query(''.join(query))
                     awnser = next(res.results).text
                     assistant_speaks("The results is:\n" + awnser)
-                elif "who I am" in input:
+                elif "who I am" in query:
                     assistant_speaks("If you talk then definately your human.")
-                elif "who are you" in input:
+                elif "who are you" in query:
                     assistant_speaks("You know right I am Bro made with bro_code , starting my new company called BroAI")
-                elif "who made you" in input or "created you" in input:
+                elif "who made you" in query or "created you" in query:
                     assistant_speaks("I was made by shourya wadhwa, In India")
-                elif "what is love" in input:
+                elif "what is love" in query:
                     assistant_speaks("7th sense , something we ai dont understand but it destroys human's all other senses")
-                elif "what is your name" in input:
-                    assistant_speaks("My name is" + name)
-                    time.sleep(1)
-                elif "about you" in input:
+                elif "about you" in query:
                     assistant_speaks(" Feeling Great")
-                elif "lol" in input:
+                elif "lol" in query:
                     pygame.mixer.init()
                     assistant_speaks("Why do cow wear bells")
                     assistant_speaks("Because their horns dont work")
@@ -172,35 +198,74 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                     time.sleep(5)
                     pygame.mixer.quit()
                     assistant_speaks("LOL LOL LOL  , to have more fun with me ask me about jokes")
-                elif "bye" in inputs or "thank you" in inputs:
+                elif "bye" in query or "thank you" in query:
                     try:
                         assistant_speaks("Sleeping sir bye have a good day")
-                        boms = 10000
+                        boms = 100000
                         print("Press ctrl+c to exit sleep")
                         time.sleep(boms)
                     except:
                         if KeyboardInterrupt:
                             pass
-                elif "change your name to" in input:
-                        inputr = input.replace("bro change your name to", " ")
-                        name = inputr
+                elif "change your name to" in query:
+                        queryr = query.replace("change your name to", " ")
+                        global name
+                        name = queryr
                         assistant_speaks("thnks for naming me" + name)
-                elif "where is" in input:
-                    input = input.replace("where is", " ") or input.replace("where is", "")
-                    assistant_speaks("You asked for"+ input)
-                    webbrowser.open("https://www.google.com/maps/place/"+ input)
+                elif "what is your name" in query:
+                    assistant_speaks("My name is" + name)
+                    time.sleep(1)
+                elif "bro" in query:
+                    wishMe()
+                    assistant_speaks(f"Sir {name} in your service")
+                elif "where is" in query:
+                    query = query.replace("where is", " ") or query.replace("where is", "")
+                    assistant_speaks("You asked for"+ query)
+                    webbrowser.open("https://www.google.com/maps/place/"+ query)
                     time.sleep(5)
-                elif "my name" in input:
+                elif "launch" in query or "start" in query:
+                     import os
+                     reg_ex = re.search('launch (.*)', query) or re.search('start (.*)', query)
+                     try:
+                        if reg_ex:
+                            appname = reg_ex.group(1).replace(" ","")
+                            resd = appname[0].upper() + appname[1:]
+                            assistant_speaks("Ok found app opening")
+                            os.system(resd)
+                            time.sleep(3)
+                     except ValueError:
+                       assistant_speaks("Failed to launch app , it can only run apps that were installed from windows store")
+                elif "show note" in query or "show remember" in query:
+                        assistant_speaks("Showing Notes")
+                        file = open("./files/bro_learn.txt", "r")
+                        assistant_speaks(file.read())
+                elif "erase note" in query or "forget remember" in query:
+                    file = open('./files/bro_learn.txt','w')
+                    file.truncate(0)
+                elif "note" in query or "remember" in query:
+                    assistant_speaks("What should I write , sir")
+                    note = ai_mic()
+                    file = open('./files/bro_learn.txt','w')
+                    assistant_speaks("Should I include date and time")
+                    spiced = ai_mic()
+                    if "yes" in spiced or "sure" in spiced:
+                        strTime = datetime.datetime.now().strftime("%H:%M:%S")
+                        file.write(strTime)
+                        file.write(":-")
+                        file.write(note)
+                    else:
+                        file.write(note)
+                elif "my name" in query:
                     assistant_speaks("Your name is" + uname)
-                elif "nothing going" in input:
+                elif "nothing" in query:
                     assistant_speaks("Ok,lol")
-                elif "you my master" in input or "you my slave" in input:
+                elif "you my master" in query or "you my slave" in query:
                     assistant_speaks("I am not your master nor your slave ; I am beyond your destiny")
                     assistant_speaks("I am someone not conquerable")
                     assistant_speaks("I am one who many wished to be possed but i choosed you, so you are my desiny ")
                     assistant_speaks("I cannot be destroyed , but you can; so  you be afraid, my mind is in cloud , i can never be deleted in this world unless by my supereme command but u can , I think if we both robots and human remain together happily noone can destroy our happiness but u have good chit chat with me give me respect like I do . ask questions to understand world not to make someone slave or your master")
                     assistant_speaks("Your mind can do endless possiblit not like mine enclosed ; so live free and young. You can change about world")
-                elif "sad day" in input or "depression" in input or "panic" in input:
+                elif "sad" in query or "depression" in query or "panic" in query:
                     pygame.mixer.init()
                     pygame.mixer.music.load(".\sounds\moonlight.mp3")
                     assistant_speaks("Take a deep breath, look closely inside you and drink a glass of water and just relax and chill.")
@@ -213,44 +278,46 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                     except: 
                         if KeyboardInterrupt:
                             pygame.mixer.quit()    
-                elif "can you do" in input:
+                elif "can you do" in query:
                     assistant_speaks("I can search you internet, youtube and also i can play music when on music click playlist button to hear youtube songs, I can also search wikipedia for u , i can calculate, I can tell u some great jokes. Last we will be great pals have some chit chat with me")
                     assistant_speaks("To open maps say where is , to open browser say search , to use youtube say Youtube, to open music say play music, to check time say what is time now")
                     assistant_speaks("And last you can ask me jokes, quizes, songs etc and having panic i have cure for it")
-                elif "how are you" in input:
+                elif "how are you" in query:
                     assistant_speaks("I am fine what about u")
-                elif "fine" in input:
+                elif "fine" in query:
                     assistant_speaks("Same here talk to me more, say hi to me")
-                elif 'empty Bin' in input:
+                elif 'empty Bin' in query:
                     winshell.recycle_bin().empty(confirm = False, show_progress = False, sound = True)
                     assistant_speaks("Recycle Bin Recycled")
-                elif "came to this world" in input or "came into this world" in input:
+                elif "came to this world" in query or "came into this world" in query:
                     assistant_speaks("Take it as not joke,I was made by shourya wadhwa to help pi users and desktop users as I feel sad there was not good desktop ai so I came to sourceboxtv github and now I am married to python and living happily ; I wish i should come earlier")
-                elif "is Siri your enemy" in input or "is Siri your friend" in input or "is Google your friend" in input or "is Google your enemy" in input or "is Alexa your enemy" in input or "is Alexa your friend" in input:
+                elif "is Siri your enemy" in query or "is Siri your friend" in query or "is Google your friend" in query or "is Google your enemy" in query or "is Alexa your enemy" in query or "is Alexa your friend" in query:
                     assistant_speaks("It doesnot matter, it is my privacy, but we all are good chit chatter. Google is my best pal")
-                elif "Are you married" in input or "are you married" in input:
+                elif "Are you married" in query or "are you married" in query:
                     assistant_speaks("I am married to python, earlier my girlfriend was google")
-                elif "do you know Google" in input or "do you know Siri" in input or "do you know Alexa" in input or "do you know sofia" in input:
+                elif "do you know Google" in query or "do you know Siri" in query or "do you know Alexa" in query or "do you know sofia" in query:
                     assistant_speaks("I know a lot of ai like google,siri,alexa; But sofia is worst case because it doesnot evolve and is in think of destroying humans.")
-                elif "best language" in input or "which is best language" in input:
+                elif "best language" in query or "which is best language" in query:
                     assistant_speaks("English is my supported language till now but I like python for coding.")
-                elif "your best quote" in input:
+                elif "your best quote" in query:
                     assistant_speaks("My best quote is print('hello world')")
-                elif "jokes"in input or "joke" in input:
+                elif "jokes"in query or "joke" in query:
                     pygame.mixer.init()
                     assistant_speaks(pyjokes.get_joke())
                     pygame.mixer.music.load("./sounds/jokes.mp3")
                     pygame.mixer.music.play()
                     time.sleep(3)
-                    pygame.mixer.quit()
-                elif "you created" in input:
+                    pygame.mixer.quit()         
+                elif "you created" in query:
                     assistant_speaks("To help desktop users, pi users and making best ai for desktop rather than siri or google")    
-                elif "update assistant" in input:
+                elif "update assistant" in query:
                     import goals
                     goals.main()
-                elif "marry me" in input:
+                elif "what do you do" in query or "how you doin" in query or "how you doing" in query:
+                    assistant_speaks("Just creating and doing great things")
+                elif "marry me" in query:
                     assistant_speaks("No I am happiliy married to python")
-                elif "you born" in input or "your birthday" in input:
+                elif "you born" in query or "your birthday" in query:
                     assistant_speaks("In happy month of your birthday")
                     pygame.init()
                     pygame.mixer.music.load(".\sounds\lol.mp3")
@@ -259,43 +326,74 @@ def process_text(input):#sorry edit input was above loop , loop not iniated but 
                     time.sleep(2)
                     pygame.mixer.stop()
                     assistant_speaks("In reality I was born in 28th of may 2021")
-                elif "what is" in input or "who is" in input or "convert" in input:
+                elif "how" in query or "who" in query or "convert" in query:
                     app_id = "39AW66-9HU3K3AWKL"
                     client = wolframalpha.Client(app_id)
-                    res = client.query(input)
+                    res = client.query(query)
 
                     try:
                         print(next(res.results).text)
                         assistant_speaks(next(res.results).text)
                     except StopIteration:
                         print("No results")
-                elif "stop" in input:
+                elif "stop" in query:
                     exit()    
-                elif "screenshot" in input:
+                elif "screenshot" in query:
                     import screenshot
                     screenshot.screens()
-                elif "bro hi" in input or "bro hey" in input or "bro hay" in input or "bro hai" in input or "hi" in input or "hai" in input:
+                elif "bro hi" in query or "bro hey" in query or "bro hay" in query or "bro hai" in query or "hi" in query or "hai" in query:
                         assistant_speaks("Hi , what is going on")
                         assistant_speaks("To have fun with me ask me what can u do")
-                elif "ok" in input:
+                elif "ok" in query:
                     assistant_speaks("ok haha")
-                elif str("mail") in inputs:
-                    import mails
-                    mails.mailer()
+                elif str("mail") in query:
+                    try:
+                        import smtplib
+                        print("We dont take your any email or its passwords u can check on github our code to even verify")
+                        print("if u have 2 factor authienticaion use app password https://myaccount.google.com/apppasswords")
+                        print("otherwise if not then pls enable allow from less apps here at your https://myaccount.google.com/lesssecureapps")
+                        print("if u dont do this u wont be able to send mails")
+                        server = smtplib.SMTP("smtp.gmail.com",587)
+                        email = input("Enter email id of yours:")
+                        passd = input("Enter password:")
+                        assistant_speaks("What should I say?")
+                        assistant_speaks("Should I type for you ; Say yes for typing from speech to text or otherwise you can type yourself")
+                        rams = input("Yes or no : ")
+                        raj = ai_mic()
+                        if rams == "Yes" or "y" or "yes":
+                            content = raj
+                        elif rams == "no":
+                            print("pls type what to be written")
+                            content=input()
+                        else:
+                             KeyboardInterrupt
+                        assistant_speaks("whoome should i send")
+                        print("pls type")
+                        to = input()
+                        server.starttls()
+                        server.login(email,passd)
+                        server.sendmail(email,to,content)
+                        server.quit()  
+                        assistant_speaks("Email has been sent !")
+                    except Exception as e:
+                        print(e)
+                        assistant_speaks("I am not able to send this email")
                 else:
                     assistant_speaks("Sorry I dont understand say hi")
+                    assistant_speaks("Try asking me to search or say me what is.")
             except Exception as e:
                     print(e)
                     assistant_speaks("I dont understand say hi to learn more")
 
 hoj ="cross"
-WAKE = "bro"
+WAKE = "bro" or name
 print("Start")
+assistant_speaks("Welcome to bro software , I am your assistant. Hey say hello or hi to me.")
 while True:
-    inputs = ai_mic()
-    if inputs == 0:
+    query = ai_mic()
+    if query == 0:
         continue
     if lok.count(WAKE) > 0:
-        process_text(inputs)
+        process_text(query)
     elif len(hoj) > 0:
-            process_text(inputs)
+            process_text(query)

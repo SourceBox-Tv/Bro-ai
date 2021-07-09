@@ -1,10 +1,14 @@
 from tkinter import *
 import ai
-import time
+import threading
 m = Tk()
 w = Canvas(m,width=450,height=450)
 w.pack()
-b = Button(text="Hano",command=ai.main)
+thread = threading.Thread(target=ai.main)
+#make test_loop terminate when the user exits the window
+thread.daemon = True 
+thread.start()
+b = Button(text="Hano")
 b.pack()
 m.title("Bro ai")
 m.mainloop()
