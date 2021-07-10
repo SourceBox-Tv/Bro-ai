@@ -20,6 +20,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
+
 mics = int(input("Tell your mic port pls type (type 1 for default):"))
 num = 1
 global name
@@ -44,7 +45,7 @@ def ai_mic():  # using mic to recognize and declaring text
             print("Listeningt text .....")
             mic.adjust_for_ambient_noise(source)
             audio = mic.listen(source,phrase_time_limit=30,timeout=100)
-            assistant_speaks("Recognizing text ....")
+            print("Recognizing text ....")
             try:
                 texts = mic.recognize_google(audio, language='en')
                 global lok
@@ -52,7 +53,7 @@ def ai_mic():  # using mic to recognize and declaring text
                 print(f"User said: {texts}\n")
                 return texts
             except Exception as e:
-                assistant_speaks("could not understand your words try again")
+                print("could not understand your words try again")
             
 
 
@@ -121,28 +122,10 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     if "Tomorrow" in query or "tomorrow" in query or "Tomorrow 's" in query:
                         assistant_speaks(f"Tommorow weather is {sky} with a temperature of {temp} on {timed}")
                     else:
-                        assistant_speaks(f"Today's weather is {sky} with a temperature of {temp} on {timed} in {place}")
+                        assistant_speaks(f"Today's weather is {sky} with a temperature of {temp} on {timed}")
                     
                 elif "time" in query:
                     times()
-                elif "Wikipedia" in query or "why" in query or "vi" in query or "what" in query:
-                    try:
-                        assistant_speaks('Searching wiki on net ....')
-                        queryr = query.replace('Wikipedia', "") or query.replace("vi","") or query.replace("why","") or query.replace("what","")
-                        queryd = wikipedia.summary(queryr, sentences=2)
-                        assistant_speaks("According to wiki ...")
-                        assistant_speaks(queryd)
-                    except Exception as e:
-                        pot = assistant_speaks(wikipedia.suggest(queryr))
-                        assistant_speaks("Gueesing it")
-                        assistant_speaks(pot)
-                    assistant_speaks("Want to continue")
-                    query = ai_mic()
-                    if(query == "yes"):
-                        queryd = wikipedia.summary(queryr,sentences="5")
-                        assistant_speaks(queryd)
-                    else:
-                        KeyboardInterrupt
                 elif "song" in query or "music" in query:
                     song = query.replace('song', '') or query.replace('music','')
                     assistant_speaks('playing ' + song)
@@ -212,7 +195,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                         global name
                         name = queryr
                         assistant_speaks("thnks for naming me" + name)
-                elif "what is your name" in query:
+                elif "your name" in query:
                     assistant_speaks("My name is" + name)
                     time.sleep(1)
                 elif "bro" in query:
@@ -262,7 +245,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                 elif "you my master" in query or "you my slave" in query:
                     assistant_speaks("I am not your master nor your slave ; I am beyond your destiny")
                     assistant_speaks("I am someone not conquerable")
-                    assistant_speaks("I am one who many wished to be possed but i choosed you, so you are my desiny ")
+                    assistant_speaks("I am one who many wished to be possessed but i choosed you, so you are my desiny ")
                     assistant_speaks("I cannot be destroyed , but you can; so  you be afraid, my mind is in cloud , i can never be deleted in this world unless by my supereme command but u can , I think if we both robots and human remain together happily noone can destroy our happiness but u have good chit chat with me give me respect like I do . ask questions to understand world not to make someone slave or your master")
                     assistant_speaks("Your mind can do endless possiblit not like mine enclosed ; so live free and young. You can change about world")
                 elif "sad" in query or "depression" in query or "panic" in query:
@@ -326,7 +309,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     time.sleep(2)
                     pygame.mixer.stop()
                     assistant_speaks("In reality I was born in 28th of may 2021")
-                elif "how" in query or "who" in query or "convert" in query:
+                elif "how" in query or "who" in query or "convert" in query or "anagram" in query or "family":
                     app_id = "39AW66-9HU3K3AWKL"
                     client = wolframalpha.Client(app_id)
                     res = client.query(query)
@@ -341,12 +324,30 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                 elif "screenshot" in query:
                     import screenshot
                     screenshot.screens()
-                elif "bro hi" in query or "bro hey" in query or "bro hay" in query or "bro hai" in query or "hi" in query or "hai" in query:
+                elif "bro hi" in query or "bro hey" in query or "bro hay" in query or "bro hai" in query or "hi" in query or "hai" in query or "hello" in query:
                         assistant_speaks("Hi , what is going on")
                         assistant_speaks("To have fun with me ask me what can u do")
                 elif "ok" in query:
                     assistant_speaks("ok haha")
-                elif str("mail") in query:
+                elif "Wikipedia" in query or "why" in query or "vi" in query or "what" in query:
+                    try:
+                        assistant_speaks('Searching wiki on net ....')
+                        queryr = query.replace('Wikipedia', "") or query.replace("vi","") or query.replace("why","") or query.replace("what","")
+                        queryd = wikipedia.summary(queryr, sentences=2)
+                        assistant_speaks("According to wiki ...")
+                        assistant_speaks(queryd)
+                    except Exception as e:
+                        pot = assistant_speaks(wikipedia.suggest(queryr))
+                        assistant_speaks("Gueesing it")
+                        assistant_speaks(pot)
+                    assistant_speaks("Want to continue")
+                    query = ai_mic()
+                    if(query == "yes"):
+                        queryd = wikipedia.summary(queryr,sentences="5")
+                        assistant_speaks(queryd)
+                    else:
+                        KeyboardInterrupt
+                elif "mail" in query:
                     try:
                         import smtplib
                         print("We dont take your any email or its passwords u can check on github our code to even verify")
