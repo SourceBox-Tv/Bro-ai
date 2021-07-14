@@ -2,6 +2,7 @@ from typing import Text
 import speech_recognition as sr
 import datetime
 import subprocess
+from wikipedia.wikipedia import languages
 import wolframalpha
 import shutil
 import speech_recognition as sr
@@ -19,7 +20,8 @@ import pyttsx3
 import re
 import requests
 from bs4 import BeautifulSoup
-
+import pyautogui as autogui
+import pyowm as owm
 
 mics = int(input("Tell your mic port pls type (type 1 for default):"))
 num = 1
@@ -31,7 +33,7 @@ def assistant_speaks(output):  # this is for just adding gtts and removing its f
     engine = pyttsx3.init()
     engine.setProperty("rate", 130)
     voices = engine.getProperty('voices')
-    engine.setProperty('voice', voices[2].id)
+    engine.setProperty('voice',voices[0].id)
     engine.say(output)
     print(output)
     engine.runAndWait()
@@ -123,7 +125,6 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                         assistant_speaks(f"Tommorow weather is {sky} with a temperature of {temp} on {timed}")
                     else:
                         assistant_speaks(f"Today's weather is {sky} with a temperature of {temp} on {timed}")
-                    
                 elif "time" in query:
                     times()
                 elif "song" in query or "music" in query:
@@ -286,11 +287,14 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     assistant_speaks("My best quote is print('hello world')")
                 elif "jokes"in query or "joke" in query:
                     pygame.mixer.init()
-                    assistant_speaks(pyjokes.get_joke())
+                    assistant_speaks(pyjokes.get_joke(category="neutral"))
                     pygame.mixer.music.load("./sounds/jokes.mp3")
                     pygame.mixer.music.play()
                     time.sleep(3)
-                    pygame.mixer.quit()         
+                    pygame.mixer.quit()
+                elif "tongue-twister" in query or "tongue twister" in query:
+                    assistant_speaks(pyjokes.get_joke(language="de",category="twister"))
+                    time.sleep(3)
                 elif "you created" in query:
                     assistant_speaks("To help desktop users, pi users and making best ai for desktop rather than siri or google")    
                 elif "update assistant" in query:
@@ -309,7 +313,50 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     time.sleep(2)
                     pygame.mixer.stop()
                     assistant_speaks("In reality I was born in 28th of may 2021")
-                elif "how" in query or "who" in query or "convert" in query or "anagram" in query or "family":
+                elif "left" in query:
+                    autogui.keyDown("alt")
+                    autogui.press("tab")
+                    autogui.press("left")
+                    autogui.keyUp("alt")
+                elif "right" in query:
+                    autogui.keyDown("alt")
+                    autogui.press("tab")
+                    autogui.press("right")
+                    autogui.keyUp("alt")
+                elif "volume up" in query:
+                    autogui.press("volumeup")
+                elif "volume down" in query:
+                    autogui.press("volumedown")
+                elif "go mute" in query or "mute" in query:
+                    autogui.press("volumemute")
+                elif "unmute" in query:
+                    autogui.press("volumeunmute")
+                elif "stop" in query:
+                    exit()    
+                elif "screenshot" in query:
+                    import screenshot
+                    screenshot.screens()
+                elif 'news' in query:
+                    try:
+                        import urllib.request as urllib2
+                        from bs4 import BeautifulSoup as soup
+                        from urllib.request import urlopen
+                        news_url="https://news.google.com/news/rss"
+                        Client=urlopen(news_url)
+                        xml_page=Client.read()
+                        Client.close()
+                        soup_page=soup(xml_page,"xml")
+                        news_list=soup_page.findAll("item")
+                        for news in news_list[:15]:
+                            assistant_speaks(news.title.text)
+                    except KeyboardInterrupt or Exception as e:
+                            print(e)
+                elif "bro hi" in query or "bro hey" in query or "bro hay" in query or "bro hai" in query or "hi" in query or "hai" in query or "hello" in query:
+                        assistant_speaks("Hi , what is going on")
+                        assistant_speaks("To have fun with me ask me what can u do")
+                elif "ok" in query:
+                    assistant_speaks("ok haha")
+                elif "how" in query or "who" in query or "convert" in query or "anagram" in query or "family" in query:
                     app_id = "39AW66-9HU3K3AWKL"
                     client = wolframalpha.Client(app_id)
                     res = client.query(query)
@@ -319,16 +366,6 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                         assistant_speaks(next(res.results).text)
                     except StopIteration:
                         print("No results")
-                elif "stop" in query:
-                    exit()    
-                elif "screenshot" in query:
-                    import screenshot
-                    screenshot.screens()
-                elif "bro hi" in query or "bro hey" in query or "bro hay" in query or "bro hai" in query or "hi" in query or "hai" in query or "hello" in query:
-                        assistant_speaks("Hi , what is going on")
-                        assistant_speaks("To have fun with me ask me what can u do")
-                elif "ok" in query:
-                    assistant_speaks("ok haha")
                 elif "Wikipedia" in query or "why" in query or "vi" in query or "what" in query:
                     try:
                         assistant_speaks('Searching wiki on net ....')
