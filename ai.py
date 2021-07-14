@@ -263,9 +263,10 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                         if KeyboardInterrupt:
                             pygame.mixer.quit()    
                 elif "can you do" in query:
-                    assistant_speaks("I can search you internet, youtube and also i can play music when on music click playlist button to hear youtube songs, I can also search wikipedia for u , i can calculate, I can tell u some great jokes. Last we will be great pals have some chit chat with me")
-                    assistant_speaks("To open maps say where is , to open browser say search , to use youtube say Youtube, to open music say play music, to check time say what is time now")
-                    assistant_speaks("And last you can ask me jokes, quizes, songs etc and having panic i have cure for it")
+                    assistant_speaks("I can search you whole internet and I can tell you a great history or currency conversions, tommorow's weather and moreever I can make your mood happy and also you can play youtube music without ads. Overall I want to say I am great to have you and you are obliged to have me")
+                    assistant_speaks("To open maps say where is , to open browser say search or find, to use youtube say Youtube, to open music say play music, to check time say what is time now or you can ask me to remember or note something and you can also ask me show thoose notes.,I can tell news and send a mail to your dear; not least I more like a virtual assistant for everytype of work but with great motive")
+                    assistant_speaks("And last you can ask me jokes, quizes, songs and even toung twisters. SAY ME LOL etc and having panic i have cure for it or want to know someone just ask me i can search for you.Even I know MrBeast too or SourceBoxTv")
+                    assistant_speaks("to restart pc or shutdown just say the word.I CAN also open apps just say start then the app name.I can clear your bin and much more but at the end we will be great pals and with great chitchat.")
                 elif "how are you" in query:
                     assistant_speaks("I am fine what about u")
                 elif "fine" in query:
