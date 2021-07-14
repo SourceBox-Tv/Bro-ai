@@ -21,7 +21,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 import pyautogui as autogui
-import pyowm as owm
+
 
 mics = int(input("Tell your mic port pls type (type 1 for default):"))
 num = 1
