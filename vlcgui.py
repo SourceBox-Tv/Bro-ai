@@ -246,11 +246,11 @@ def main():
     """ The main program function """
 
     # Create the media player
-    mp = MediaPlayer(size=(1920, 1080), scale=0.5)
+    mp = MediaPlayer(size=(1920, 1080), scale=1)
 
     # Main event loop
     while True:
-        event, values = mp.window.read(timeout=1000)
+        event, values = mp.window.read(timeout=10)
         mp.get_track_info()
         if event in (None, 'Exit'):
             break

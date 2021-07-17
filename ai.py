@@ -21,7 +21,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 import pyautogui as autogui
-
+from speedtest import Speedtest
 
 mics = int(input("Tell your mic port pls type (type 1 for default):"))
 num = 1
@@ -91,7 +91,9 @@ def times():#this is for declaring time
 def process_text(query):#sorry edit query was above loop , loop not iniated but anyways its for running code      
             try:  
                 import time 
-                if "YouTube" in query or "Youtube" in query:
+                if "Youtube Easter" in query:
+                    autogui.write("awesome")
+                elif "YouTube" in query or "Youtube" in query:
                     assistant_speaks("Here on youtube")
                     youtubers = query.replace('YouTube', " ") or query.replace('Youtube', " ")
                     youtubers.split(',')
@@ -105,7 +107,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                 
                 elif "search" in query or "find" in query:
                     assistant_speaks("Searching globaly")
-                    searches = query.replace('bro search', " ") or query.replace('find', " ")
+                    searches = query.replace('search', " ") or query.replace('find', " ")
                     webbrowser.open("https://www.google.com/search?q=" + searches)
                     time.sleep(5)
                 
@@ -114,9 +116,9 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     html = requests.get(url).content
                     soup = BeautifulSoup(html, 'html.parser')
                     temp = soup.find('div', attrs={'class': 'BNeawe iBp4i AP7Wnd'}).text
-                    str = soup.find('div', attrs={'class': 'BNeawe tAd8D AP7Wnd'}).text
+                    strs = soup.find('div', attrs={'class': 'BNeawe tAd8D AP7Wnd'}).text
                     strTime = datetime.datetime.now().strftime("%H:%M:%S")
-                    data = str.split('\n')
+                    data = strs.split('\n')
                     timed = data[0]
                     sky = data[1]
                     listdiv = soup.findAll('div', attrs={'class': 'BNeawe s3v9rd AP7Wnd'})
@@ -144,7 +146,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                         exit()
                     else:
                         subprocess.call(["shutdown", "/s"])
-                elif 'lock window' in query:
+                elif 'lock window' in query or "sleep pc" in query: 
                     assistant_speaks("locking the device")
                     ctypes.windll.user32.LockWorkStation()
                 elif "Hibernate PC" in query or "Log off" in query:
@@ -191,6 +193,20 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     except:
                         if KeyboardInterrupt:
                             pass
+                elif "speed test" in query or "internet test" in query:
+                        speed_test = Speedtest()
+                        download = speed_test.download()
+                        upload = speed_test.upload()
+                        downloadspeed = round(download/(10**6),1)
+                        uploadspeed =  round(upload/(10**6),1)
+                        assistant_speaks("Download speed:" + str(downloadspeed) + " mbps")
+                        assistant_speaks("Upload speed:" + str(uploadspeed) + " mbps")
+                elif "IP address" in query or "ip address" in query or "ip" in query:
+                   import socket
+                   hostname = socket.gethostname()
+                   ipadds = socket.gethostbyname(hostname)
+                   assistant_speaks(f"PC name: {hostname}")
+                   assistant_speaks(f"Your IP address: {ipadds} ")     
                 elif "change your name to" in query:
                         queryr = query.replace("change your name to", " ")
                         global name
@@ -235,7 +251,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     if "yes" in spiced or "sure" in spiced:
                         strTime = datetime.datetime.now().strftime("%H:%M:%S")
                         file.write(strTime)
-                        file.write(":-")
+                        file.write(":-\n")
                         file.write(note)
                     else:
                         file.write(note)
@@ -264,9 +280,9 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                             pygame.mixer.quit()    
                 elif "can you do" in query:
                     assistant_speaks("I can search you whole internet and I can tell you a great history or currency conversions, tommorow's weather and moreever I can make your mood happy and also you can play youtube music without ads. Overall I want to say I am great to have you and you are obliged to have me")
-                    assistant_speaks("To open maps say where is , to open browser say search or find, to use youtube say Youtube, to open music say play music, to check time say what is time now or you can ask me to remember or note something and you can also ask me show thoose notes.,I can tell news and send a mail to your dear; not least I more like a virtual assistant for everytype of work but with great motive")
-                    assistant_speaks("And last you can ask me jokes, quizes, songs and even toung twisters. SAY ME LOL etc and having panic i have cure for it or want to know someone just ask me i can search for you.Even I know MrBeast too or SourceBoxTv")
-                    assistant_speaks("to restart pc or shutdown just say the word.I CAN also open apps just say start then the app name.I can clear your bin and much more but at the end we will be great pals and with great chitchat.")
+                    assistant_speaks("To open maps say where is , to open browser say search or find, to use youtube say Youtube, to open music say play music, to check time say what is time now or you can ask me to remember or note something and you can also ask me show thoose notes ; can tell news and send a mail to your dear; not least I more like a virtual assistant for everytype of work but with great motive")
+                    assistant_speaks("And last you can ask me jokes, quizes, songs and even toung twisters. SAY ME LOL etc and having panic i have cure for it or want to know someone just ask me i can search for you ; Even I know MrBeast too or SourceBoxTv")
+                    assistant_speaks("to restart pc or shutdown just say the word ; I CAN also open apps just say start then the app name;I can clear your bin and much more but at the end we will be great pals and with great chitchat;")
                 elif "how are you" in query:
                     assistant_speaks("I am fine what about u")
                 elif "fine" in query:
@@ -314,18 +330,14 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     time.sleep(2)
                     pygame.mixer.stop()
                     assistant_speaks("In reality I was born in 28th of may 2021")
-                elif "left" in query:
-                    autogui.keyDown("alt")
-                    autogui.press("tab")
-                    autogui.press("left")
-                    autogui.keyUp("alt")
-                elif "right" in query:
-                    autogui.keyDown("alt")
-                    autogui.press("tab")
-                    autogui.press("right")
-                    autogui.keyUp("alt")
+                elif "pause" in query:
+                    autogui.press("space")
                 elif "volume up" in query:
                     autogui.press("volumeup")
+                elif "next" in query:
+                    autogui.hotkey('shift','N')
+                elif "previous" in query:
+                    autogui.hotkey('shift','P')
                 elif "volume down" in query:
                     autogui.press("volumedown")
                 elif "go mute" in query or "mute" in query:
@@ -338,7 +350,6 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     import screenshot
                     screenshot.screens()
                 elif 'news' in query:
-                    try:
                         import urllib.request as urllib2
                         from bs4 import BeautifulSoup as soup
                         from urllib.request import urlopen
@@ -350,8 +361,8 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                         news_list=soup_page.findAll("item")
                         for news in news_list[:15]:
                             assistant_speaks(news.title.text)
-                    except KeyboardInterrupt or Exception as e:
-                            print(e)
+                        else:
+                            KeyboardInterrupt
                 elif "bro hi" in query or "bro hey" in query or "bro hay" in query or "bro hai" in query or "hi" in query or "hai" in query or "hello" in query:
                         assistant_speaks("Hi , what is going on")
                         assistant_speaks("To have fun with me ask me what can u do")
