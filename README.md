@@ -16,7 +16,7 @@ Bro could run on any os but windows is what we support for now in issues other o
  
  To update assistant,start assistant using exe or the setup folder with ai.py and say "update assistant"
 
- what can it do, just ask him. But for example it can play specific video on youtube,search youtube,play music, play media, search net, keep u out of panic or deepression , take screenshot, change his name,ask jokes, ask question or even calculate him or ask time etc basically have fun other updates will come to this in future.
+ what can it do, just ask him. But for example it can play specific video on youtube,search youtube,play music, play media, search net, keep u out of panic or deepression , take screenshot, change his name,ask jokes, ask question or even calculate him or ask time,ask for weather etc basically have fun other updates will come to this in future.
 
 ## Authors
 
