@@ -88,7 +88,7 @@ class MediaPlayer:
             [sg.Column(col1), sg.Column(col2)]]
         global window
         # Create a PySimpleGUI window from the specified parameters
-        window = sg.Window('VLC Media Player',main_layout, element_justification='center', icon=ICON, finalize=True,resizable=True,)
+        window = sg.Window('Bro ai player',main_layout, element_justification='center', icon=ICON, finalize=True,resizable=True,)
         # Expand the time element so that the row elements are positioned correctly
         window['TIME'].expand(expand_x=True)
         return window
@@ -246,7 +246,7 @@ def main():
     """ The main program function """
 
     # Create the media player
-    mp = MediaPlayer(size=(1920, 1080), scale=1)
+    mp = MediaPlayer(size=(3840,2160), scale=1)
 
     # Main event loop
     while True:

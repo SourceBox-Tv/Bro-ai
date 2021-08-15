@@ -31,7 +31,7 @@ name = (" Bro 1.0")
 
 def assistant_speaks(output):  # this is for just adding gtts and removing its file
     engine = pyttsx3.init()
-    engine.setProperty("rate", 130)
+    engine.setProperty("rate", 140)
     voices = engine.getProperty('voices')
     engine.setProperty('voice',voices[0].id)
     engine.say(output)
@@ -133,7 +133,10 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     song = query.replace('song', '') or query.replace('music','')
                     assistant_speaks('playing ' + song)
                     pywhatkit.playonyt(song)
-                    
+                elif "play me":
+                    song = query.replace('song', '') 
+                    assistant_speaks('playing ' + song)
+                    pywhatkit.playonyt(song)
                 elif "play media" in query or "play video" in query:
                     vlcgui.main()
                 elif "shutdown PC" in query:
@@ -443,7 +446,5 @@ while True:
     query = ai_mic()
     if query == 0:
         continue
-    if lok.count(WAKE) > 0:
-        process_text(query)
-    elif len(hoj) > 0:
+    if len(hoj) > 0:
             process_text(query)
