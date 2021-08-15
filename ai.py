@@ -93,9 +93,9 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                 import time 
                 if "Youtube Easter" in query:
                     autogui.write("awesome")
-                elif "YouTube" in query or "Youtube" in query:
+                elif "YouTube" in query or "On YouTube" in query:
                     assistant_speaks("Here on youtube")
-                    youtubers = query.replace('YouTube', " ") or query.replace('Youtube', " ")
+                    youtubers = query.replace('YouTube', " ") or query.replace('On Youtube', " ")
                     youtubers.split(',')
                     webbrowser.open("https://www.youtube.com/results?search_query=" + youtubers)
                     time.sleep(5)
