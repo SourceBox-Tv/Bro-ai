@@ -134,7 +134,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     assistant_speaks('playing ' + song)
                     pywhatkit.playonyt(song)
                 elif "play me":
-                    song = query.replace('song', '') 
+                    song = query.replace('play me', '') 
                     assistant_speaks('playing ' + song)
                     pywhatkit.playonyt(song)
                 elif "play media" in query or "play video" in query:
