@@ -133,7 +133,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     song = query.replace('song', '') or query.replace('music','')
                     assistant_speaks('playing ' + song)
                     pywhatkit.playonyt(song)
-                elif "play me":
+                elif "play me" in query:
                     song = query.replace('play me', '') 
                     assistant_speaks('playing ' + song)
                     pywhatkit.playonyt(song)
@@ -158,6 +158,8 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                 elif "restart PC" in query:
                     assistant_speaks("Entering restarting mode")
                     subprocess.call(["shutdown", "/r"])
+                elif "Good Morning" in query:
+                    assistant_speaks(wishMe)
                 elif "you know" in query:
                     assistant_speaks("I know ")
                     assistant_speaks("You can ask me to search or wikipedia")
