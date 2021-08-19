@@ -23,18 +23,30 @@ Bro could run on any os but windows is what we support for now in issues other o
 - [@Coderlogy](https://github.com/CoderLogy)
 
   
-## License
+## Licensing 
 
 [AGPL](https://github.com/SourceBox-Tv/Bro-aiwithpython/blob/master/LICENSE)
-
+ 
+We are working under https://img.shields.io/github/license/SourceBox-Tv/Bro-Ai?style=social License , so we encourage you with this commiting opensource and staying public with 
+safe and also keeping us safe without disturbing any intellectual property of anyone and us.
+ 
+If you want your contributions on our platform then make it on agpl and add this badge in its readme:
+https://img.shields.io/github/license/SourceBox-Tv/Bro-Ai?style=for-the-badge
+We also encourage people to use our rights in right way and doing great things while helping us to grow.
+Add this to your repo to increasing our platform demand-
+ 
+[![badge](https://github.com/SourceBox-Tv/Bro-ai/blob/master/screens/icon%20image.png?raw=true)](https://github.com/SourceBox-Tv/Bro-ai)
+ 
   
 ## Feedback
 
 If you have any feedback, please open a issue.
 
   
-## Badges
+## Badges and Socials
 
-[![MIT License](https://img.shields.io/apm/l/atomic-design-ui.svg?)](https://github.com/tterb/atomic-design-ui/blob/master/LICENSEs)
+https://img.shields.io/github/license/SourceBox-Tv/Bro-Ai?style=flat-square
 
 [![Discord](https://img.shields.io/discord/757875229656875080?style=flat-square)](https://discord.gg/gGugvbs)
+
+https://img.shields.io/youtube/channel/subscribers/UC4-BRxXYcfADtkPa_qE1Xhw?label=Subscribe%20us%20now&style=social
