@@ -27,11 +27,12 @@ Bro could run on any os but windows is what we support for now in issues other o
 
 [AGPL](https://github.com/SourceBox-Tv/Bro-aiwithpython/blob/master/LICENSE)
  
-We are working under https://img.shields.io/github/license/SourceBox-Tv/Bro-Ai?style=social License , so we encourage you with this commiting opensource and staying public with 
-safe and also keeping us safe without disturbing any intellectual property of anyone and us.
+We are working under [![License](https://img.shields.io/github/license/SourceBox-Tv/Bro-ai.svg?style=social)](https://github.com/SourceBox-Tv/Bro-ai) License , so we encourage you with this commiting opensource and staying public with safe and also keeping us safe without disturbing any intellectual property of anyone and us.
  
 If you want your contributions on our platform then make it on agpl and add this badge in its readme:
-https://img.shields.io/github/license/SourceBox-Tv/Bro-Ai?style=for-the-badge
+ 
+[![License](https://img.shields.io/github/license/SourceBox-Tv/Bro-ai.svg?style=for-the-badge)](https://github.com/SourceBox-Tv/Bro-ai)
+ 
 We also encourage people to use our rights in right way and doing great things while helping us to grow.
 Add this to your repo to increasing our platform demand-
  
@@ -45,8 +46,8 @@ If you have any feedback, please open a issue.
   
 ## Badges and Socials
 
-https://img.shields.io/github/license/SourceBox-Tv/Bro-Ai?style=flat-square
+[![License](https://img.shields.io/github/license/SourceBox-Tv/Bro-ai.svg?style=flat-square)](https://github.com/SourceBox-Tv/Bro-ai)
 
 [![Discord](https://img.shields.io/discord/757875229656875080?style=flat-square)](https://discord.gg/gGugvbs)
 
-https://img.shields.io/youtube/channel/subscribers/UC4-BRxXYcfADtkPa_qE1Xhw?label=Subscribe%20us%20now&style=social
+[![Youtube](https://img.shields.io/youtube/channel/subscribers/UC4-BRxXYcfADtkPa_qE1Xhw?label=Subscribe%20us%20now&style=social)](https://www.youtube.com/channel/UC4-BRxXYcfADtkPa_qE1Xhw)
