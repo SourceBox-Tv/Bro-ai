@@ -27,7 +27,8 @@ Bro could run on any os but windows is what we support for now in issues other o
 
 [AGPL](https://github.com/SourceBox-Tv/Bro-aiwithpython/blob/master/LICENSE)
  
-We are working under [![License](https://img.shields.io/github/license/SourceBox-Tv/Bro-ai.svg?style=social)](https://github.com/SourceBox-Tv/Bro-ai) License , so we encourage you with this commiting opensource and staying public with safe and also keeping us safe without disturbing any intellectual property of anyone and us.
+We are working under [![License](https://img.shields.io/github/license/SourceBox-Tv/Bro-ai.svg?style=social)](https://github.com/SourceBox-Tv/Bro-ai/blob/master/LICENSE) 
+License , so we encourage you with this commiting opensource and staying public with safe and also keeping us safe without disturbing any intellectual property of anyone and us.
  
 If you want your contributions on our platform then make it on agpl and add this badge in its readme:
  
