@@ -25,7 +25,7 @@ Bro could run on any os but windows is what we support for now in issues other o
   
 ## License
 
-[MIT](https://github.com/SourceBox-Tv/Bro-aiwithpython/blob/master/LICENSE)
+[AGPL](https://github.com/SourceBox-Tv/Bro-aiwithpython/blob/master/LICENSE)
 
   
 ## Feedback
