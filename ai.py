@@ -93,11 +93,13 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                 import time 
                 if "Youtube Easter" in query:
                     autogui.write("awesome")
-                elif "YouTube" in query or "On YouTube" in query:
+                elif "Google" in query:
+                    webbrowser.open("https://www.google.com",new=0)
+                elif "YouTube" in query or "Youtube" in query:
                     assistant_speaks("Here on youtube")
-                    youtubers = query.replace('YouTube', " ") or query.replace('On Youtube', " ")
+                    youtubers = query.replace('YouTube', " ") or query.replace('Youtube', " ")
                     youtubers.split(',')
-                    webbrowser.open("https://www.youtube.com/results?search_query=" + youtubers)
+                    webbrowser.open("https://www.youtube.com/results?search_query=" + youtubers,new = 0)
                     time.sleep(5)
                     
                 elif "say" in query or "repeat" in query:
@@ -108,7 +110,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                 elif "search" in query or "find" in query:
                     assistant_speaks("Searching globaly")
                     searches = query.replace('search', " ") or query.replace('find', " ")
-                    webbrowser.open("https://www.google.com/search?q=" + searches)
+                    webbrowser.open("https://www.google.com/search?q=" + searches,new=0)
                     time.sleep(5)
                 
                 elif "temperature" in query or "weather" in query:
@@ -226,7 +228,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                 elif "where is" in query:
                     query = query.replace("where is", " ") or query.replace("where is", "")
                     assistant_speaks("You asked for"+ query)
-                    webbrowser.open("https://www.google.com/maps/place/"+ query)
+                    webbrowser.open("https://www.google.com/maps/place/"+ query,new=0)
                     time.sleep(5)
                 elif "launch" in query or "start" in query:
                      import os
@@ -366,8 +368,10 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                         news_list=soup_page.findAll("item")
                         for news in news_list[:15]:
                             assistant_speaks(news.title.text)
-                        else:
-                            KeyboardInterrupt
+                            if KeyboardInterrupt:
+                                print("ok")
+                                break
+                            
                 elif "bro hi" in query or "bro hey" in query or "bro hay" in query or "bro hai" in query or "hi" in query or "hai" in query or "hello" in query:
                         assistant_speaks("Hi , what is going on")
                         assistant_speaks("To have fun with me ask me what can u do")
