@@ -14,3 +14,5 @@ clint
 wikipedia
 beautifulsoup4
 PySimpleGUI
+flask
+youtube-dl
