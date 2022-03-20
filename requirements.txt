@@ -16,3 +16,4 @@ beautifulsoup4
 PySimpleGUI
 flask
 youtube-dl
+PyAudio-0.2.11-cp310-cp310-win_amd64.whl
