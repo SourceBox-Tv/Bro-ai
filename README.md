@@ -1,22 +1,19 @@
 # Bro-ai
-This is a simple ai made by us
-It is a desktop ai that will be updated in the future and it is the first ai to include the RPI platform in it in the future. 
-Its a cool ai and it is called Bro code is written in python made by Sourceboxtv
-For now any  queries or wanted feature open issues
+Bro-ai is a simple AI developed by our team. It is designed to be a desktop AI that will receive regular updates in the future. What sets Bro-ai apart is that it is the first AI to incorporate the RPI platform. Developed using Python by Sourceboxtv, Bro-ai is a cool and versatile AI.
 
+Currently, we welcome any queries or requests for new features. If you encounter any issues, please feel free to open an issue on our GitHub repository.
 
-Plus if u downloaded this ai sourcecode goto cmd and install using code <pip install -r requirements.txt> in the directory of the folder.
+If you have downloaded the AI source code, you can easily install it by running the following command in the folder's directory by running it in terminal or powershell:
 
- 
+```pip install -r requirements.txt```
+
 Download windows version from here https://github.com/SourceBox-Tv/Bro-aiwithpython/releases/latest/
  
-Windows version is easy downloading plug and play, more versions will come in the future with different os.
-Bro could run on any os but windows are what we support for now in issues another os will roll out support
-
+The Windows version is straightforward to install and ready to use. In the future, we plan to release versions for different operating systems, but for now, we primarily support Windows. However, if you encounter any issues on other operating systems, we will work on providing support for them as well.
  
- To update assistant, start assistant using exe or the setup folder with ai.py and say "update assistant"
+To update assistant, start assistant using exe or the setup folder with ai.py and say "update assistant"
 
- what can it do, just ask him. But for example, it can play specific videos on youtube, search youtube, play music, play media, search the net, keep u out of panic or depression, take a screenshot, change his name, ask jokes, ask a question or even calculate him or ask the time, ask for the weather, etc basically have fun other updates will come to this in future.
+Bro-ai is equipped with various capabilities. You can ask it to play specific videos on YouTube, search YouTube, play music or media, search the internet, provide emotional support to keep you calm, take screenshots, change its name, tell jokes, answer questions, perform calculations, provide the current time, give weather updates, and much more. We are constantly working on adding new features and updates to make your experience even better.
 
 ## Authors
 
@@ -29,9 +26,9 @@ Bro could run on any os but windows are what we support for now in issues anothe
  
 We are working under [![License](https://img.shields.io/github/license/SourceBox-Tv/Bro-ai.svg?style=social)](https://github.com/SourceBox-Tv/Bro-ai/blob/master/LICENSE) 
 
-So, we encourage you with this committing opensource and staying public with safe and also keeping us safe without disturbing any intellectual property of anyone and us.
- 
-If you want your contributions on our platform then make it on agpl and add this badge in its readme:
+We strongly believe in the principles of open source and encourage contributors to respect intellectual property rights while contributing to our project.
+
+If you would like to contribute to our platform, please ensure that your contributions are made under the AGPL license and include the following badge in your project's readme:
  
 [![License](https://img.shields.io/github/license/SourceBox-Tv/Bro-ai.svg?style=for-the-badge)](https://github.com/SourceBox-Tv/Bro-ai)
 
@@ -39,8 +36,8 @@ Copy it 😍
  
 ```[![License](https://img.shields.io/github/license/SourceBox-Tv/Bro-ai.svg?style=for-the-badge)]```
  
-We also encourage people to use our rights in the right way and doing great things while helping us to grow.
-Add this to your repo to increasing our platform demand-
+We also encourage individuals to utilize our platform responsibly, respecting the rights of others and contributing positively to our growth. 
+You can showcase your support by adding this badge to your repository:
  
 [![badge](https://github.com/SourceBox-Tv/Bro-ai/blob/master/screens/icon%20image.png?raw=true)](https://github.com/SourceBox-Tv/Bro-ai)
 
@@ -50,7 +47,7 @@ Copy it 🤑
   
 ## Feedback
 
-If you have any feedback, please open an issue.
+If you have any feedback or suggestions, please open an issue on our GitHub repository. We value your input and strive to continuously improve Bro-ai based on user feedback.
 
   
 ## Badges and Socials
