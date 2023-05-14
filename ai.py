@@ -11,7 +11,7 @@ import wikipedia
 import webbrowser
 import pyjokes
 import pygame
-import vlcgui
+import media
 import ctypes
 from time import ctime
 import winshell
@@ -29,9 +29,11 @@ global name
 global names
 name = (" Bro 1.0")
 
+
 def assistant_speaks(output):  # this is for just adding gtts and removing its file
     engine = pyttsx3.init()
     engine.setProperty("rate", 140)
+    engine.setProperty('volume', 1.0)
     voices = engine.getProperty('voices')
     engine.setProperty('voice',voices[0].id)
     engine.say(output)
@@ -126,7 +128,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     listdiv = soup.findAll('div', attrs={'class': 'BNeawe s3v9rd AP7Wnd'})
                     strd = listdiv[5].text
                     if "Tomorrow" in query or "tomorrow" in query or "Tomorrow 's" in query:
-                        assistant_speaks(f"Tommorow weather is {sky} with a temperature of {temp} on {timed}")
+                        assistant_speaks(f"Tommorow is {timed} weather is {sky} .")
                     else:
                         assistant_speaks(f"Today's weather is {sky} with a temperature of {temp} on {timed}")
                 elif "time" in query:
@@ -140,7 +142,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     assistant_speaks('playing ' + song)
                     pywhatkit.playonyt(song)
                 elif "play media" in query or "play video" in query:
-                    vlcgui.main()
+                    media.main()
                 elif "shutdown PC" in query:
                     assistant_speaks("3")
                     assistant_speaks("2")
@@ -160,8 +162,6 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                 elif "restart PC" in query:
                     assistant_speaks("Entering restarting mode")
                     subprocess.call(["shutdown", "/r"])
-                elif "Good Morning" in query:
-                    assistant_speaks(wishMe)
                 elif "you know" in query:
                     assistant_speaks("I know ")
                     assistant_speaks("You can ask me to search or wikipedia")
@@ -187,13 +187,14 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     assistant_speaks("Why do cow wear bells")
                     assistant_speaks("Because their horns dont work")
                     pygame.mixer.music.load(".\sounds\laughs.mp3")
+                    pygame.mixer.music.set_volume(0.5) 
                     pygame.mixer.music.play()
                     time.sleep(5)
                     pygame.mixer.quit()
                     assistant_speaks("LOL LOL LOL  , to have more fun with me ask me about jokes")
                 elif "bye" in query or "thank you" in query:
                     try:
-                        assistant_speaks("Sleeping sir bye have a good day")
+                        assistant_speaks("Sleeping sir bye have a good day 🛌")
                         boms = 100000
                         print("Press ctrl+c to exit sleep")
                         time.sleep(boms)
@@ -207,13 +208,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                         downloadspeed = round(download/(10**6),1)
                         uploadspeed =  round(upload/(10**6),1)
                         assistant_speaks("Download speed:" + str(downloadspeed) + " mbps")
-                        assistant_speaks("Upload speed:" + str(uploadspeed) + " mbps")
-                elif "IP address" in query or "ip address" in query or "ip" in query:
-                   import socket
-                   hostname = socket.gethostname()
-                   ipadds = socket.gethostbyname(hostname)
-                   assistant_speaks(f"PC name: {hostname}")
-                   assistant_speaks(f"Your IP address: {ipadds} ")     
+                        assistant_speaks("Upload speed:" + str(uploadspeed) + " mbps")     
                 elif "change your name to" in query:
                         queryr = query.replace("change your name to", " ")
                         global name
@@ -262,6 +257,8 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                         file.write(note)
                     else:
                         file.write(note)
+                elif "Good" in query or "good" in query:
+                    assistant_speaks(wishMe)
                 elif "my name" in query:
                     assistant_speaks("Your name is" + uname)
                 elif "nothing" in query:
@@ -275,6 +272,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                 elif "sad" in query or "depression" in query or "panic" in query:
                     pygame.mixer.init()
                     pygame.mixer.music.load(".\sounds\moonlight.mp3")
+                    pygame.mixer.music.set_volume(1) 
                     assistant_speaks("Take a deep breath, look closely inside you and drink a glass of water and just relax and chill.")
                     assistant_speaks("Life is not ending its just every day new beginning, so stop overthink")
                     assistant_speaks("So last advice as AI ; You are master of senses and control of imagination think beyond what others think  and  solve the life's equation , to win it")
@@ -317,7 +315,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     time.sleep(3)
                     pygame.mixer.quit()
                 elif "tongue-twister" in query or "tongue twister" in query:
-                    assistant_speaks(pyjokes.get_joke(language="de",category="twister"))
+                    assistant_speaks(pyjokes.get_joke(language="en",category="twister"))
                     time.sleep(3)
                 elif "you created" in query:
                     assistant_speaks("To help desktop users, pi users and making best ai for desktop rather than siri or google")    
@@ -405,6 +403,12 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                         assistant_speaks(queryd)
                     else:
                         KeyboardInterrupt
+                elif "IP address" in query or "ip address" in query or "ip" in query:
+                   import socket
+                   hostname = socket.gethostname()
+                   ipadds = socket.gethostbyname(hostname)
+                   assistant_speaks(f"PC name: {hostname}")
+                   assistant_speaks(f"Your IP address: {ipadds} ")
                 elif "mail" in query:
                     try:
                         import smtplib
@@ -426,7 +430,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                             content=input()
                         else:
                              KeyboardInterrupt
-                        assistant_speaks("whoome should i send")
+                        assistant_speaks("whome should i send")
                         print("pls type")
                         to = input()
                         server.starttls()

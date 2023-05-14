@@ -36,7 +36,7 @@ class MediaPlayer:
         # Setup GUI window for output of media
         self.theme = theme  # This can be changed, but I'd stick with a dark theme
         self.default_bg_color = sg.LOOK_AND_FEEL_TABLE[self.theme]['BACKGROUND']
-        self.window_size = 1200,720  # The size of the GUI window
+        self.window_size = 1280,720  # The size of the GUI window
         #self.player_size = [x*scale for x in size]  # The size of the media output window
         self.window = self.create_window()
         self.check_platform()  # Window handler adj for Linux/Windows/MacOS
@@ -111,7 +111,7 @@ class MediaPlayer:
             # Set meta data for media if available
             media.set_meta(0, vid.title)
             media.set_meta(1, vid.author)
-
+            media.get_mrl()
         except:  # This is a file path and not an online url
             media = self.instance.media_new(track)
             media.set_meta(0, track.replace('\\', '/').split('/').pop())  # filename
