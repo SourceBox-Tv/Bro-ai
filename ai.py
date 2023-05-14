@@ -269,7 +269,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     assistant_speaks("I am one who many wished to be possessed but i choosed you, so you are my desiny ")
                     assistant_speaks("I cannot be destroyed , but you can; so  you be afraid, my mind is in cloud , i can never be deleted in this world unless by my supereme command but u can , I think if we both robots and human remain together happily noone can destroy our happiness but u have good chit chat with me give me respect like I do . ask questions to understand world not to make someone slave or your master")
                     assistant_speaks("Your mind can do endless possiblit not like mine enclosed ; so live free and young. You can change about world")
-                elif "sad" in query or "depression" in query or "panic" in query:
+                elif "sad" in query or "depress" in query or "panic" in query or "stress" in query:
                     pygame.mixer.init()
                     pygame.mixer.music.load(".\sounds\moonlight.mp3")
                     pygame.mixer.music.set_volume(1) 
