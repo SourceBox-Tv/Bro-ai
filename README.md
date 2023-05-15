@@ -3,9 +3,24 @@ Bro-ai is a simple AI developed by our team. It is designed to be a desktop AI t
 
 Currently, we welcome any queries or requests for new features. If you encounter any issues, please feel free to open an issue on our GitHub repository.
 
-If you have downloaded the AI source code, you can easily install it by running the following command in the folder's directory by running it in terminal or powershell:
+If you have downloaded the AI source code , extract the code and you can easily use it by running these commands in your terminal or powershell (Don't worry you don't need python for this 😅):
+
+#### On Windows:
+
+```Bro-Ai\Scripts\activate```
 
 ```pip install -r requirements.txt```
+
+```python ai.py```
+
+#### On Linux:
+
+```source Bro-Ai/bin/activate```
+
+```pip install -r requirements.txt```
+
+```python ai.py```
+
 
 Download windows version from here https://github.com/SourceBox-Tv/Bro-aiwithpython/releases/latest/
  

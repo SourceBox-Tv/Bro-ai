@@ -22,6 +22,9 @@ import requests
 from bs4 import BeautifulSoup
 import pyautogui as autogui
 from speedtest import Speedtest
+import os
+import sys
+
 
 mics = int(input("Tell your mic port pls type (type 1 for default):"))
 num = 1
@@ -29,6 +32,12 @@ global name
 global names
 name = (" Bro 1.0")
 
+
+def resource_path(relative_path):
+    """Get absolute path to resource, works for PyInstaller and direct execution."""
+    if hasattr(sys, "_MEIPASS"):
+        return os.path.join(sys._MEIPASS, relative_path)
+    return os.path.join(os.path.abspath("."), relative_path)
 
 def assistant_speaks(output):  # this is for just adding gtts and removing its file
     engine = pyttsx3.init()
@@ -59,7 +68,36 @@ def ai_mic():  # using mic to recognize and declaring text
             except Exception as e:
                 print("could not understand your words try again")
             
-
+def mailer():
+            try:
+                import smtplib
+                print("We dont take your any email or its passwords u can check on github our code to even verify")
+                print("if u have 2 factor authienticaion use app password https://myaccount.google.com/apppasswords")
+                print("otherwise if not then pls enable allow from less apps here at your https://myaccount.google.com/lesssecureapps")
+                print("if u dont do this u wont be able to send mails")
+                server = smtplib.SMTP("smtp.gmail.com",587)
+                email = input("Enter email id of yours:")
+                passd = input("Enter password:")
+                assistant_speaks("What should I say?")
+                assistant_speaks("Should I type for you ; Type yes for typing from speech to text or otherwise you can type yourself")
+                rams = input("Yes or no : ")
+                raj = ai_mic()
+                if rams == "Yes" or "y" or "yes":
+                    content = raj
+                else:
+                    print("pls type what to be written")
+                    content=input()
+                assistant_speaks("whome should i send")
+                print("Pls type recivers email id")
+                to = input()
+                server.starttls()
+                server.login(email,passd)
+                server.sendmail(email,to,content)
+                server.quit()  
+                assistant_speaks("Email has been sent !")
+            except Exception as e:
+                print(e)
+                assistant_speaks("I am not able to send this email")
 
 def wishMe():#this is for wishing user
     hour = int(datetime.datetime.now().hour)
@@ -182,11 +220,11 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     assistant_speaks("7th sense , something we ai dont understand but it destroys human's all other senses")
                 elif "about you" in query:
                     assistant_speaks(" Feeling Great")
-                elif "lol" in query:
+                elif "lol" in query or "l o l" in query:
                     pygame.mixer.init()
                     assistant_speaks("Why do cow wear bells")
                     assistant_speaks("Because their horns dont work")
-                    pygame.mixer.music.load(".\sounds\laughs.mp3")
+                    pygame.mixer.music.load(resource_path("sounds/laughs.mp3"))
                     pygame.mixer.music.set_volume(0.5) 
                     pygame.mixer.music.play()
                     time.sleep(5)
@@ -271,7 +309,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                     assistant_speaks("Your mind can do endless possiblit not like mine enclosed ; so live free and young. You can change about world")
                 elif "sad" in query or "depress" in query or "panic" in query or "stress" in query:
                     pygame.mixer.init()
-                    pygame.mixer.music.load(".\sounds\moonlight.mp3")
+                    pygame.mixer.music.load(resource_path("sounds/moonlight.mp3"))
                     pygame.mixer.music.set_volume(1) 
                     assistant_speaks("Take a deep breath, look closely inside you and drink a glass of water and just relax and chill.")
                     assistant_speaks("Life is not ending its just every day new beginning, so stop overthink")
@@ -310,7 +348,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                 elif "jokes"in query or "joke" in query:
                     pygame.mixer.init()
                     assistant_speaks(pyjokes.get_joke(category="neutral"))
-                    pygame.mixer.music.load("./sounds/jokes.mp3")
+                    pygame.mixer.music.load(resource_path("sounds/jokes.mp3"))
                     pygame.mixer.music.play()
                     time.sleep(3)
                     pygame.mixer.quit()
@@ -329,7 +367,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                 elif "you born" in query or "your birthday" in query:
                     assistant_speaks("In happy month of your birthday")
                     pygame.init()
-                    pygame.mixer.music.load(".\sounds\lol.mp3")
+                    pygame.mixer.music.load(resource_path("sounds/lol.mp3"))
                     assistant_speaks("LOL")
                     pygame.mixer.music.play()
                     time.sleep(2)
@@ -410,37 +448,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
                    assistant_speaks(f"PC name: {hostname}")
                    assistant_speaks(f"Your IP address: {ipadds} ")
                 elif "mail" in query:
-                    try:
-                        import smtplib
-                        print("We dont take your any email or its passwords u can check on github our code to even verify")
-                        print("if u have 2 factor authienticaion use app password https://myaccount.google.com/apppasswords")
-                        print("otherwise if not then pls enable allow from less apps here at your https://myaccount.google.com/lesssecureapps")
-                        print("if u dont do this u wont be able to send mails")
-                        server = smtplib.SMTP("smtp.gmail.com",587)
-                        email = input("Enter email id of yours:")
-                        passd = input("Enter password:")
-                        assistant_speaks("What should I say?")
-                        assistant_speaks("Should I type for you ; Say yes for typing from speech to text or otherwise you can type yourself")
-                        rams = input("Yes or no : ")
-                        raj = ai_mic()
-                        if rams == "Yes" or "y" or "yes":
-                            content = raj
-                        elif rams == "no":
-                            print("pls type what to be written")
-                            content=input()
-                        else:
-                             KeyboardInterrupt
-                        assistant_speaks("whome should i send")
-                        print("pls type")
-                        to = input()
-                        server.starttls()
-                        server.login(email,passd)
-                        server.sendmail(email,to,content)
-                        server.quit()  
-                        assistant_speaks("Email has been sent !")
-                    except Exception as e:
-                        print(e)
-                        assistant_speaks("I am not able to send this email")
+                    mailer()
                 else:
                     assistant_speaks("Sorry I dont understand say hi")
                     assistant_speaks("Try asking me to search or say me what is.")
@@ -451,7 +459,7 @@ def process_text(query):#sorry edit query was above loop , loop not iniated but 
 hoj ="cross"
 WAKE = "bro" or name
 print("Start")
-assistant_speaks("Welcome to bro software , I am your assistant. Hey say hello or hi to me.")
+assistant_speaks("Welcome to bro software , I am your assistant. Hey say hello or hi to me .")
 while True:
     query = ai_mic()
     if query == 0:
